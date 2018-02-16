@@ -1,0 +1,57 @@
+extends layout
+
+block content
+    nav(class="navbar") 
+        div(class="header-image-div")
+        h1(class="roomHeader") EDIT
+        h1(class="roomHeader2") EDIT
+
+    div(class="signup-div")
+        form(method="POST", action=`/students/update/${x._id}`,class="signup-form")
+            lable Enter first name
+                br
+                input(name="firstname", type="firstname", value=x.firstname,class="input-name")
+            br
+            lable Enter last name
+                br
+                input(name="lastname", type="lastname", value=x.lastname,class="input-name")
+            br
+            lable Enter email
+                br
+                input(name="email", type="email", value=x.email,class="input-name")
+            br
+            lable Enter age
+                br
+                input(name="age", type="age", value=x.age,class="input-name")
+
+            br
+            lable Enter height
+                br
+                input(name="height", type="height", value=x.height,class="input-name")
+            br
+            lable Enter weight
+                br
+                input(name="weight", type="weight", value=x.weight,class="input-name")
+            lable Select gender
+                br
+                select(name="gender",class="input-name" )
+                    option(value=x.gender)
+                    option(value="Male") Male
+                    option(value="Female") Female
+
+
+
+
+            
+            br
+            input(type="submit", value="Edit",class="signup-button")
+            br
+            a(href="/profile",class="have-account") Go back
+
+    
+
+block script
+    
+    //- script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+    script(src="/js/main.js")
+

@@ -1,0 +1,195 @@
+@font-face{
+    font-family:fixation;
+    src:url("/fonts/Fixation.ttf");
+}
+
+
+
+body{
+    background-color:rgb(230, 230, 230);
+}
+.navbar{
+    text-align:center;
+}
+/* #signupHeader{
+    text-align:center;
+} */
+.header-image-div{
+    margin-left:auto;
+    margin-right:auto;
+    height: 200px;
+    width:1000px;
+    background-image :url("/images/header-blur-image.png");
+    border:2px solid black;
+    z-index: -1;
+    overflow: hidden;
+    opacity:1;
+}
+/* .header-image{
+    height: 200px;
+    width:1000px;
+    border:2px solid black;
+    z-index: -1;
+    overflow: hidden;
+    opacity:1;
+} */
+
+.roomHeader{
+    color:rgb(43, 42, 40);
+    position:relative;
+    margin-top: -140px;
+
+    
+    
+    font-size:100px;
+    font-family:fixation;
+    font-weight:normal;
+    
+}
+.roomHeader2{
+    color:rgb(212, 66, 66);
+    position:relative;
+    margin-top: -178px;
+    margin-left:-9px;
+    
+
+    font-size:100px;
+    font-family:fixation;
+    font-weight:normal;
+}
+
+.signup-form{
+    width:400px;
+    margin-top:200px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.signup-button{
+    padding:10px 10px 10px 10px;
+    margin-bottom:10px;
+    margin-left:328px;
+    border:0px;
+    background-color:#028dff;
+    color:white;
+    cursor:pointer;
+    border-radius:5px;
+}
+.signup-button:hover{
+    background-color: #037cde;
+}
+.have-account{
+    text-decoration:none;
+    padding-left:230px;
+    
+}
+
+
+.login-form{
+    margin-left:auto;
+    margin-right:auto;
+    padding-top:10%;
+    
+    width:400px;
+
+}
+
+
+
+
+lable {
+    display: block;
+    position: relative;
+    text-transform: uppercase;
+    color: #aaa;
+}
+  
+input[type='password'] {
+    width: 100%;
+    box-sizing: border-box;
+    height: 55px;
+    display: inline-block;
+    border: 3px solid #2F96EF;
+    border-radius: 5px;
+    padding: 0 15px;
+    margin: 10px 0;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+  
+
+.input-name{
+    width: 100%;
+    box-sizing: border-box;
+    height: 55px;
+    display: inline-block;
+    border: 3px solid #2F96EF;
+    border-radius: 5px;
+    padding: 0 15px;
+    margin: 10px 0;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+
+
+input:focus {
+    outline: none;
+    -moz-outline: none;
+    -webkit-outline: none;
+}
+lable[class='pass']:before {
+    content: "\f070";
+    color: #aaa;
+    font-size: 22px;
+    font-family: FontAwesome;
+    position: absolute;
+    right: 25px;
+    top: 44px;
+}
+  
+
+.progress-bar_text {
+    display: inline-block;
+    color: #aaa;
+    margin-left: 5px;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+  
+  
+  
+
+  
+ 
+.login-words{
+    font-family: Strawberry_Blossom;
+	/*font-weight: bold;*/
+	font-size:200px;
+
+	text-align: center;
+	position:relative;
+
+}
+  
+  
+.welcome-bg{
+	width:100%;
+	position:fixed;
+	z-index: -1;
+    min-width:1200px;
+}
+
+@font-face {
+	font-family : Strawberry_Blossom;
+	src:url(../fonts/Strawberry_Blossom.otf);
+}
+.welcome_words{
+	font-family: Strawberry_Blossom;
+	/*font-weight: bold;*/
+	font-size:200px;
+	padding-top:23%;
+	text-align: center;
+	position:relative;
+	opacity:0;
+	transition:2s;
+	
+}

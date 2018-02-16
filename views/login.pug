@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+  img(class="welcome-bg" src="/images/fruit-background.jpg")
+  div(class="welcome_words") Get s0arted
+
+
+  div(class="login-words") Log in
+  form(method="POST", action="/user/login", class="login-form")
+    input(name="username",class="input-name" ,placeholder="Username")
+    br
+    input(name="password", type="password", placeholder="Password")
+    br
+    input(type="submit", value="Login")
+    br
+    a(href="/user/signup") Don't have account ?
+
+    br
+    a(href="/") back
+
+
+
+
+block script
+  script(src="/js/main.js")

@@ -1,0 +1,62 @@
+extends layout
+
+block content
+    if (x)
+        
+        p#username logged in as : #{x.username}   
+        p#firstname first name : #{x.firstname}   
+        p#lastname last name : #{x.lastname}   
+        p#email email : #{x.email}   
+        p#age age : #{x.age}   
+        p#height height : #{x.height} cm
+        p#weight weight : #{x.weight} kg  
+        p#gender gender : #{x.gender}   
+        
+        a#edit(href='/profile/edit') EDIT PROFILE
+        br
+
+    br
+    p#suggestion by info, the number of calories for you is : #{result} per day.
+    
+
+
+    p(class="intake-input") What did you eat today?
+    div#dailyResult
+    div#dailyTotal
+    div#input_form
+        select(name="ds",class="input-ds" id = "ds")
+            option(value="ads" selected="selected") From All Data Source
+            option(value="Standard Reference") Standard Reference
+            option(value="Branded Food Products") Branded Food Products
+        input(id="intakeInputBox" onkeyup = "saveValue(this)")
+        span
+            button#intake-submit submit
+
+
+
+
+
+
+
+
+    br
+    br
+    br
+    a#gochat(href='/chat') Chat
+    br
+    br
+    a#logout(href='/user/logout') Logout
+
+block script
+    script(src="/js/main.js" type='text/javascript')
+
+    //- script(type='text/javascript').
+
+    //-     var user = !{JSON.stringify(x)}
+
+    //-     if(user.gender === "Female"){
+    //-         var result = 10 * user.weight + 6.25 * user.height - 5 * user.age - 161;
+    //-     }
+    //-     var before = document.getElementById("suggestion");
+        
+    //-     before.innerHTML += result +" per day";

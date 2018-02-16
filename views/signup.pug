@@ -1,0 +1,69 @@
+extends layout
+
+block content
+    nav(class="navbar") 
+        div(class="header-image-div")
+        h1(class="roomHeader") Sign Up
+        h1(class="roomHeader2") Sign Up
+
+    div(class="signup-div")
+        form(method="POST", action="/user/signup",class="signup-form")
+            lable Enter Username
+                br
+                input(name="username", type="username", placeholder="Username",class="input-name")
+            br
+            
+            lable(class="pass") Enter Password
+                br
+                input(name="password", type="password", placeholder="Password",class="input-password")
+
+            span(class="progress-bar_text")
+
+            br
+            lable Enter first name
+                br
+                input(name="firstname", type="firstname", placeholder="firstname",class="input-name")
+            br
+            lable Enter last name
+                br
+                input(name="lastname", type="lastname", placeholder="lastname",class="input-name")
+            br
+            lable Enter email
+                br
+                input(name="email", type="email", placeholder="email",class="input-name")
+            br
+            lable Enter age
+                br
+                input(name="age", type="age", placeholder="age",class="input-name")
+
+            br
+            lable Enter height (in cm)
+                br
+                input(name="height", type="height", placeholder="height (cm)",class="input-name")
+            br
+            lable Enter weight (in kg)
+                br
+                input(name="weight", type="weight", placeholder="weight (kg)",class="input-name")
+            lable Select gender
+                br
+                select(name="gender",class="input-name")
+                    option(value="Gender" selected="selected") Gender
+                    option(value="Male") Male
+                    option(value="Female") Female
+
+
+
+
+            
+            br
+            input(type="submit", value="Signup",class="signup-button")
+            br
+            a(href="/user/login",class="have-account") Already have account ?
+
+    
+
+block script
+    
+    //- script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+    script(src="/js/main.js")
+
