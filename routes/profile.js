@@ -13,6 +13,7 @@ router.get('/', (req, res, next) => {
         }else{
             var result = 10 * req.user.weight + 6.25 * req.user.height - 5 * req.user.age + 5;
         }
+        // console.log(req.user.calory)
         res.render('profile', { x: req.user,
 
                                 result })

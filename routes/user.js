@@ -30,7 +30,9 @@ router.post('/signup', (req, res, next) => {
   Students.register(new Students({ username : req.body.username ,firstname:req.body.firstname,
                                   lastname:req.body.lastname, email:req.body.email,
                                   age:req.body.age,gender:req.body.gender,
-                                height:req.body.height,weight:req.body.weight}), req.body.password, (err, student) => {
+                                height:req.body.height,weight:req.body.weight,
+                                calory:[]
+                               }), req.body.password, (err, student) => {
     if (err) {
       return(err)
     }else{

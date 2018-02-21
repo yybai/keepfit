@@ -11,7 +11,12 @@ block content
         p#height height : #{x.height} cm
         p#weight weight : #{x.weight} kg  
         p#gender gender : #{x.gender}   
-        
+
+
+
+    
+        p calory : #{x.calory}
+
         a#edit(href='/profile/edit') EDIT PROFILE
         br
 
@@ -30,11 +35,11 @@ block content
             option(value="Branded Food Products") Branded Food Products
         input(id="intakeInputBox" onkeyup = "saveValue(this)")
         span
-            button#intake-submit submit
+            button#intake-submit search
 
 
 
-
+    div#searchResult
 
 
 

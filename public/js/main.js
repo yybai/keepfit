@@ -55,16 +55,36 @@ $( document ).ready(function() {
 
     console.log(ds);
     $.ajax({
-      url:"https://api.nal.usda.gov/ndb/search/?api_key=V9HNK7n5Os363SabjLiwkcSa3m3HWP73M8rX4f2V&format=JSON&q="+q + "&ds="+ds,
+      url:"https://api.nal.usda.gov/ndb/search/?api_key=V9HNK7n5Os363SabjLiwkcSa3m3HWP73M8rX4f2V&format=JSON&q="+q + "&ds="+ds +"&sort=r",
       success:function(result){
         var ndbno = result.list.item[0].ndbno;
+        var count = Object.keys(result.list.item).length;
+        
+        for (i=0;i<count;i++){
+          console.log(result.list.item[i].name);
+        }
+
+
+
+
+
         $.ajax({
           url:"https://api.nal.usda.gov/ndb/V2/reports?api_key=V9HNK7n5Os363SabjLiwkcSa3m3HWP73M8rX4f2V&type=f&format=json&ndbno="+ndbno,
           success:function(result){
-            nutrion = result.foods[0].food.nutrients[0].value;
+            // nutrion = result.foods[0].food.nutrients[0].value;
+
+            for (i=0;i<result.foods[0].food.nutrients.length;i++){
+              if (result.foods[0].food.nutrients[i].nutrient_id == "208"){
+                nutrion = result.foods[0].food.nutrients[i].value;
+              }
+            }
+
+
+
+
             var i = parseInt(nutrion);
             total_cal = total_cal + i;
-            console.log(result.foods[0].food.nutrients[0].value);
+            // console.log(result.foods[0].food.nutrients[0].value);
             $("#dailyResult").append(q+"  calories: " + nutrion + "<br>");
             $("#dailyTotal").html("Total calories you take today is: " + total_cal);
           }
@@ -127,7 +147,7 @@ $( document ).ready(function() {
   const changeText = function (el, text, color) {
     el.text(text).css('color', color);
   };
-  console.log("hello");
+  
   
   $('.input-password').keyup(function(){
     
