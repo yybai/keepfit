@@ -15,7 +15,7 @@ block content
 
 
     
-        p calory : #{x.calory}
+        //- p calory : #{x.calory}
 
         a#edit(href='/profile/edit') EDIT PROFILE
         br
@@ -33,10 +33,12 @@ block content
             option(value="ads" selected="selected") From All Data Source
             option(value="Standard Reference") Standard Reference
             option(value="Branded Food Products") Branded Food Products
-        input(id="intakeInputBox" onkeyup = "saveValue(this)")
+        input(id="intakeInputBox")
         span
-            button#intake-submit search
-
+            button#intake-search search
+        span
+            button#intake-submit submit
+    
 
 
     div#searchResult
@@ -53,5 +55,73 @@ block content
     a#logout(href='/user/logout') Logout
 
 block script
-    script(src="/js/main.js" type='text/javascript')
+    script(src="https://code.jquery.com/jquery-1.11.1.js")
+    script(src="/scripts/socket.io-client/dist/socket.io.js")
+    script(src="/js/main.js")
+    script.
+        const socket = io();
+        
+        const user = !{JSON.stringify(x)};//javascript 拿server pass过来的information
+        //console.log(user);
+        
+
+
+        $('#intake-submit').click(function(e) {
+
+        
+            
+            socket.emit('daily item', { item: $('#intakeInputBox').val(), user: user.username });
+            
+        })
+
+    //- socket.emit('user list',{});
+    //- socket.on('online user',(obj) =>{
+    //-   console.log(obj);
+    //-   $('#userList').text('');
+    //-   $('#numUsers').text(`There are:  ${obj.length} users online !`);
+    //-   for (i = 0; i < obj.length ;i++ ){
+
+    //-     $('#userList').append(`${obj[i]} <br>`);
+    //-   }
+    //-   //- $('#userList').text(`${obj}`);
+    //-   //- $('#userList').append('<br>');
+    //- })
+
+    //- socket.on('chat broadcast', (obj) => {
+    //-   console.log(obj.user);
+    //-   console.log(user.username);
+    //-   console.log(obj.user == user.username);
+    //-   if (obj.user == user.username){
+    //-     $('#messages').append(`<li style='color: black;
+    //-                                       margin-right:10%;
+    //-                                       text-align:right;
+    //-                                       background-color:#d5ffce;
+    //-                                       margin-bottom:5px;
+    //-                                       padding-right:1px;
+    //-                             '> ${obj.message} : ${obj.user}</li>`);
+    //-   }else{
+    //-     $('#messages').append(`<li style='color: ${obj.color};
+    //-                                       background-color:#e0e0db;
+    //-                                       margin-bottom:5px;
+    //-                                       margin-right:10%;
+    //-                                       '>${obj.user}: ${obj.message}</li>`);
+    //-   }
+      
+      
+      
+    //- })
+
+    //- socket.on('disconnect',(obj)=>{
+    //-   socket.emit('disconnection',{user:user.username});
+    //- });
+
+    //- socket.on('logged in info',(obj) =>{
+    //-   $('#messages').append(`<li style = 'color:black; text-align:center; width:100%;'> ${obj.user} is online now!  `)
+    //- })
+
+    //- socket.on('logged out info',(obj) =>{
+    //-   $('#messages').append(`<li style = 'color:grey; text-align:center;'> ${obj} left.  `)
+    //- })
+
+
 

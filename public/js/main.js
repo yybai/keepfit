@@ -13,16 +13,13 @@ function blurElement(element, size) {
   });
 }
 
-function saveValue(e){
-  var id = e.id;
-  var val = e.value;
-  localStorage.setItem(id,val);
-}
+
 
 
 
 
 $( document ).ready(function() {
+
   $('.login-form').hide();
   $('.login-words').hide();
   
@@ -35,104 +32,54 @@ $( document ).ready(function() {
   var total_cal = 0;
   var intake_list = [];
   var nutrion = 0 ;
-  $('#intake-submit').click(function(){
+  $('#intake-search').click(function(){
     var q = document.getElementById("intakeInputBox").value;
     var ds = document.getElementById("ds").value;
     if ((ds !== "Standard Reference") & (ds !== "Branded Food Products")){
       ds = "";
     }
 
-    document.getElementById("intakeInputBox").value = getSavedValue("intakeInputBox");
-
-    function getSavedValue (v){
-      if (localStorage.getItem(v) === null) {
-        return "";
-      }
-        return localStorage.getItem(v);
-    }
-    
-
-
-    console.log(ds);
     $.ajax({
       url:"https://api.nal.usda.gov/ndb/search/?api_key=V9HNK7n5Os363SabjLiwkcSa3m3HWP73M8rX4f2V&format=JSON&q="+q + "&ds="+ds +"&sort=r",
       success:function(result){
-        var ndbno = result.list.item[0].ndbno;
-        var count = Object.keys(result.list.item).length;
-        
-        for (i=0;i<count;i++){
-          console.log(result.list.item[i].name);
+        $('#searchResult').html("");
+        result.list.item.forEach(function(i){
+          var row = '<div class="container" id="'+i.ndbno+'">';
+          row += '<p>' + i.name + '</p>';
+          row += '</div>';
+          $('#searchResult').append(row);
+        })
+      }
+    })
+  })
+  $("div").on("click",".container",function(){
+    console.log(  $(this).attr('id')  );
+    var ndbno = $(this).attr('id');
+    $.ajax({
+      url:"https://api.nal.usda.gov/ndb/V2/reports?api_key=V9HNK7n5Os363SabjLiwkcSa3m3HWP73M8rX4f2V&type=f&format=json&ndbno="+ndbno,
+      success:function(result){
+      
+
+        for (i=0;i<result.foods[0].food.nutrients.length;i++){
+          if (result.foods[0].food.nutrients[i].nutrient_id == "208"){
+            nutrion = result.foods[0].food.nutrients[i].value;
+          }
         }
 
+        
 
 
-
-
-        $.ajax({
-          url:"https://api.nal.usda.gov/ndb/V2/reports?api_key=V9HNK7n5Os363SabjLiwkcSa3m3HWP73M8rX4f2V&type=f&format=json&ndbno="+ndbno,
-          success:function(result){
-            // nutrion = result.foods[0].food.nutrients[0].value;
-
-            for (i=0;i<result.foods[0].food.nutrients.length;i++){
-              if (result.foods[0].food.nutrients[i].nutrient_id == "208"){
-                nutrion = result.foods[0].food.nutrients[i].value;
-              }
-            }
-
-
-
-
-            var i = parseInt(nutrion);
-            total_cal = total_cal + i;
-            // console.log(result.foods[0].food.nutrients[0].value);
-            $("#dailyResult").append(q+"  calories: " + nutrion + "<br>");
-            $("#dailyTotal").html("Total calories you take today is: " + total_cal);
-          }
-        })
+        var i = parseInt(nutrion);
+        total_cal = total_cal + i;
+        // console.log(result.foods[0].food.nutrients[0].value);
+        $("#dailyResult").append(result.foods[0].food.desc.name+"  calories: " + nutrion + "<br>");
+        $("#dailyTotal").html("Total calories you take today is: " + total_cal);
       }
       
     })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     
 
-
-
-
-  })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  });
 
   $(".welcome_words").click(function(){
     $(".welcome_words").hide();

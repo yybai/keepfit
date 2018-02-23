@@ -1,4 +1,6 @@
 const Chats = require('./models/chats');
+const Calories = require('./models/calory');
+
 
 function remove(array,element){
     return array.filter(e => e !== element);
@@ -34,6 +36,17 @@ module.exports = (io) => {
                 } else {
                     io.emit('chat broadcast', obj)
                 }
+            }) 
+        });
+        socket.on('daily item', obj => {
+            const calory = new Calories(obj);
+            calory.save((err, doc) => {
+                console.log("success!!")
+                // if(err){
+                //     io.emit('chat broadcast', { ...obj, message: err })
+                // } else {
+                //     io.emit('chat broadcast', obj)
+                // }
             }) 
         });
 
