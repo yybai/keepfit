@@ -38,26 +38,17 @@ module.exports = (io) => {
                 }
             }) 
         });
-        socket.on('daily item', obj => {
+        socket.on('daily calory', obj => {
             const calory = new Calories(obj);
             calory.save((err, doc) => {
                 console.log("success!!")
-                // if(err){
-                //     io.emit('chat broadcast', { ...obj, message: err })
-                // } else {
-                //     io.emit('chat broadcast', obj)
-                // }
+
             }) 
         });
 
 
-        // socket.on('notification',function(msg){
-        //     console.log(msg);
-        //     io.emit('notification',msg);
-        // })
 
-
-         socket.on('disconnect' , function() {
+        socket.on('disconnect' , function() {
             
             console.log(userList.indexOf(socket.user));
             console.log('   user disconnected .................');
@@ -69,7 +60,7 @@ module.exports = (io) => {
             console.log('   after ' + userList);
 
             io.emit('online user',userList);
-         })
+        })
     });
 
 

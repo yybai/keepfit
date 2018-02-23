@@ -14,20 +14,34 @@ function blurElement(element, size) {
 }
 
 
-
-
-
-
 $( document ).ready(function() {
 
   $('.login-form').hide();
   $('.login-words').hide();
   
+  $('#result_table').hide();
+  $('#hideTable').hide();
+  $('#showTable').click(function(){
+    $('#showTable').hide();
+    $('#hideTable').show();
+    $('#result_table').show();
+  })
+  $('#hideTable').click(function(){
+    $('#showTable').show();
+    $('#hideTable').hide();
+    $('#result_table').hide();
+  })
+
+
+
+
+
+
+
+
 
 
   $(".welcome_words").animate({opacity: 1});
-
-
 
   var total_cal = 0;
   var intake_list = [];
@@ -59,7 +73,7 @@ $( document ).ready(function() {
       url:"https://api.nal.usda.gov/ndb/V2/reports?api_key=V9HNK7n5Os363SabjLiwkcSa3m3HWP73M8rX4f2V&type=f&format=json&ndbno="+ndbno,
       success:function(result){
       
-
+        //find nutrient id = 208 which is "Energy" = "Calory"
         for (i=0;i<result.foods[0].food.nutrients.length;i++){
           if (result.foods[0].food.nutrients[i].nutrient_id == "208"){
             nutrion = result.foods[0].food.nutrients[i].value;
@@ -67,13 +81,12 @@ $( document ).ready(function() {
         }
 
         
-
-
         var i = parseInt(nutrion);
         total_cal = total_cal + i;
-        // console.log(result.foods[0].food.nutrients[0].value);
+        
         $("#dailyResult").append(result.foods[0].food.desc.name+"  calories: " + nutrion + "<br>");
         $("#dailyTotal").html("Total calories you take today is: " + total_cal);
+        $("#forTotal").val(total_cal);
       }
       
     })

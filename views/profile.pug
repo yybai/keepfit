@@ -14,20 +14,29 @@ block content
 
 
 
-    
-        //- p calory : #{x.calory}
-
         a#edit(href='/profile/edit') EDIT PROFILE
         br
-
     br
     p#suggestion by info, the number of calories for you is : #{result} per day.
     
-
-
     p(class="intake-input") What did you eat today?
     div#dailyResult
     div#dailyTotal
+    table#result_table
+        tr
+            th user
+            th calory
+            th createdAt
+            th
+        each calory in calories
+            tr
+                td=calory.user
+                td=calory.calory
+                td=calory.createdAt
+                td#deleteTotal delete
+    div#showTable show table
+    div#hideTable hide table
+    input(id = "forTotal", style = "visibility:hidden")
     div#input_form
         select(name="ds",class="input-ds" id = "ds")
             option(value="ads" selected="selected") From All Data Source
@@ -38,14 +47,7 @@ block content
             button#intake-search search
         span
             button#intake-submit submit
-    
-
-
     div#searchResult
-
-
-
-
     br
     br
     br
@@ -68,60 +70,10 @@ block script
 
         $('#intake-submit').click(function(e) {
 
-        
-            
-            socket.emit('daily item', { item: $('#intakeInputBox').val(), user: user.username });
-            
+            socket.emit('daily calory', { calory: $('#forTotal').val(), user: user.username });
+            window.alert("saved to database!");
+            location.reload();
         })
-
-    //- socket.emit('user list',{});
-    //- socket.on('online user',(obj) =>{
-    //-   console.log(obj);
-    //-   $('#userList').text('');
-    //-   $('#numUsers').text(`There are:  ${obj.length} users online !`);
-    //-   for (i = 0; i < obj.length ;i++ ){
-
-    //-     $('#userList').append(`${obj[i]} <br>`);
-    //-   }
-    //-   //- $('#userList').text(`${obj}`);
-    //-   //- $('#userList').append('<br>');
-    //- })
-
-    //- socket.on('chat broadcast', (obj) => {
-    //-   console.log(obj.user);
-    //-   console.log(user.username);
-    //-   console.log(obj.user == user.username);
-    //-   if (obj.user == user.username){
-    //-     $('#messages').append(`<li style='color: black;
-    //-                                       margin-right:10%;
-    //-                                       text-align:right;
-    //-                                       background-color:#d5ffce;
-    //-                                       margin-bottom:5px;
-    //-                                       padding-right:1px;
-    //-                             '> ${obj.message} : ${obj.user}</li>`);
-    //-   }else{
-    //-     $('#messages').append(`<li style='color: ${obj.color};
-    //-                                       background-color:#e0e0db;
-    //-                                       margin-bottom:5px;
-    //-                                       margin-right:10%;
-    //-                                       '>${obj.user}: ${obj.message}</li>`);
-    //-   }
-      
-      
-      
-    //- })
-
-    //- socket.on('disconnect',(obj)=>{
-    //-   socket.emit('disconnection',{user:user.username});
-    //- });
-
-    //- socket.on('logged in info',(obj) =>{
-    //-   $('#messages').append(`<li style = 'color:black; text-align:center; width:100%;'> ${obj.user} is online now!  `)
-    //- })
-
-    //- socket.on('logged out info',(obj) =>{
-    //-   $('#messages').append(`<li style = 'color:grey; text-align:center;'> ${obj} left.  `)
-    //- })
 
 
 
