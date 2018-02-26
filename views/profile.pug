@@ -35,7 +35,7 @@ block content
                 td=calory.calory
                 td=calory.createdAt
                 td
-                    button#deleteTotal(tid = calory._id) delete
+                    button(class="deleteTotal")(tid = calory._id) delete
     div#showTable show table
     div#hideTable hide table
 
@@ -70,7 +70,7 @@ block script
     //- script(src="https://code.jquery.com/jquery-1.11.1.js")
     script(src="/scripts/socket.io-client/dist/socket.io.js")
     
-    //- script(src="/js/main.js")
+    script(src="/js/main.js")
     
     script.
         const socket = io();
@@ -87,7 +87,7 @@ block script
             location.reload();
         })
 
-        $('#deleteTotal').click(function(e){
+        $('.deleteTotal').click(function(e){
             const tid = $(this).attr('tid');
             $.ajax({
                 type:'POST',
@@ -96,7 +96,7 @@ block script
                 success:function(res){
                     if(res.result === 'success'){
                         window.alert("deleted!");
-                        console.log(tid);
+                        //- console.log(tid);
                         
                         $('#' +tid).remove();
                         

@@ -15,6 +15,7 @@ router.post('/update/:id', (req, res, next) => {
   })
 })
 
+//handle delete daily total from database
 router.post('/delete', (req, res, next) => {
   Calories.remove({ _id: req.body.tid }, err => {
     if (err){

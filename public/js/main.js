@@ -67,13 +67,20 @@ $( document ).ready(function() {
           row += '</div>';
           $('#searchResult').append(row);
         })
+        $('.easyPaginateNav').html("");
         $('#searchResult').easyPaginate({
           paginateElement: 'div',
           elementsPerPage: 20,
           // effect: 'climb'
         });
+
       }
     })
+
+
+
+
+
   })
   $("div").on("click",".container",function(){
     console.log(  $(this).attr('id')  );

@@ -6,7 +6,12 @@ const Calories = require('../models/calory');
 router.get('/', (req, res, next) => {
 
 
-
+    if(req.user.username === "admin"){
+        res.render('admin',{
+            adm:req.user
+            
+        })
+    }
 
     
 

@@ -48,11 +48,13 @@ const chat = require('./routes/chat');
 const user = require('./routes/user');
 const profile = require('./routes/profile');
 
+
 app.use('/', index);
 app.use('/students', students);
 app.use('/chat', chat);
 app.use('/user', user);
 app.use('/profile',profile);
+
 
 // connect mongoDB
 mongoose.connect('mongodb://leobai:1992taozi@ds117888.mlab.com:17888/webdxd', { useMongoClient:true });
