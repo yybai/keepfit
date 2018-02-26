@@ -50,14 +50,14 @@ module.exports = (io) => {
 
         socket.on('disconnect' , function() {
             
-            console.log(userList.indexOf(socket.user));
-            console.log('   user disconnected .................');
-            console.log(socket.user + 'left');
-            console.log('   before ' + userList);
+            // console.log(userList.indexOf(socket.user));
+            // console.log('   user disconnected .................');
+            // console.log(socket.user + 'left');
+            // console.log('   before ' + userList);
             io.emit('logged out info',socket.user);
 
             userList = remove(userList,socket.user);
-            console.log('   after ' + userList);
+            // console.log('   after ' + userList);
 
             io.emit('online user',userList);
         })

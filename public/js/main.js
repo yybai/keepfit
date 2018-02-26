@@ -18,7 +18,7 @@ $( document ).ready(function() {
 
   $('.login-form').hide();
   $('.login-words').hide();
-  
+  $('#paging').hide();
   $('#result_table').hide();
   $('#hideTable').hide();
   $('#showTable').click(function(){
@@ -33,7 +33,11 @@ $( document ).ready(function() {
   })
 
 
-
+  // $('#searchResult').easyPaginate({
+  //   paginateElement: 'div',
+  //   elementsPerPage: 3,
+  //   effect: 'climb'
+  // });
 
 
 
@@ -63,6 +67,11 @@ $( document ).ready(function() {
           row += '</div>';
           $('#searchResult').append(row);
         })
+        $('#searchResult').easyPaginate({
+          paginateElement: 'div',
+          elementsPerPage: 20,
+          // effect: 'climb'
+        });
       }
     })
   })

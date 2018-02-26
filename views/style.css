@@ -3,7 +3,8 @@
     src:url("/fonts/Fixation.ttf");
 }
 
-
+.easyPaginateNav a {padding:5px;}
+.easyPaginateNav a.current {font-weight:bold;text-decoration:underline;}
 
 body{
     background-color:rgb(230, 230, 230);

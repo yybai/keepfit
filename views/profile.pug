@@ -22,6 +22,7 @@ block content
     p(class="intake-input") What did you eat today?
     div#dailyResult
     div#dailyTotal
+
     table#result_table
         tr
             th user
@@ -29,13 +30,18 @@ block content
             th createdAt
             th
         each calory in calories
-            tr
+            tr(id=`${calory._id}`)
                 td=calory.user
                 td=calory.calory
                 td=calory.createdAt
-                td#deleteTotal delete
+                td
+                    button#deleteTotal(tid = calory._id) delete
     div#showTable show table
     div#hideTable hide table
+
+
+
+
     input(id = "forTotal", style = "visibility:hidden")
     div#input_form
         select(name="ds",class="input-ds" id = "ds")
@@ -47,6 +53,8 @@ block content
             button#intake-search search
         span
             button#intake-submit submit
+
+
     div#searchResult
     br
     br
@@ -57,9 +65,13 @@ block content
     a#logout(href='/user/logout') Logout
 
 block script
-    script(src="https://code.jquery.com/jquery-1.11.1.js")
+    
+    //- script(src="http://code.jquery.com/jquery-latest.js")
+    //- script(src="https://code.jquery.com/jquery-1.11.1.js")
     script(src="/scripts/socket.io-client/dist/socket.io.js")
-    script(src="/js/main.js")
+    
+    //- script(src="/js/main.js")
+    
     script.
         const socket = io();
         
@@ -74,6 +86,29 @@ block script
             window.alert("saved to database!");
             location.reload();
         })
+
+        $('#deleteTotal').click(function(e){
+            const tid = $(this).attr('tid');
+            $.ajax({
+                type:'POST',
+                url:'/students/delete',
+                data:{tid},
+                success:function(res){
+                    if(res.result === 'success'){
+                        window.alert("deleted!");
+                        console.log(tid);
+                        
+                        $('#' +tid).remove();
+                        
+                        
+                    }
+                }
+            })
+        })
+
+
+
+        
 
 
 
