@@ -4,10 +4,10 @@ const Students = require('../models/students');
 const passport = require('passport');
 
 
-var userList = [];
-function remove(array,element){
-  return array.filter(e => e !== element);
-}
+// var userList = [];
+// function remove(array,element){
+//   return array.filter(e => e !== element);
+// }
 
 
 router.get('/login', (req, res) => {
@@ -45,7 +45,17 @@ router.post('/signup', (req, res, next) => {
   });
 });
 
-
+//delete user
+router.post('/delete', (req, res, next) => {
+  Students.remove({ _id: req.body.uid }, err => {
+    if (err){
+      res.send(err)
+    }
+    else{
+      res.json({ result: 'success' })
+    }
+  })
+})
 
 
 router.get('/logout', (req, res) => {

@@ -6,15 +6,50 @@ function blurElement(element, size) {
       'mozFilter':filterVal,
       'oFilter':filterVal,
       'msFilter':filterVal,
-      'transition':'all 3s ease-out',
-      '-webkit-transition':'all 3s ease-out',
-      '-moz-transition':'all 3s ease-out',
-      '-o-transition':'all 3s ease-out'
+      'transition':'all 1.5s ease-out',
+      '-webkit-transition':'all 1.5s ease-out',
+      '-moz-transition':'all 1.5s ease-out',
+      '-o-transition':'all 1.5s ease-out'
   });
 }
 
 
 $( document ).ready(function() {
+
+  $('#registeredUser').hide();
+  $('#hideUser').hide();
+  $('#showUser').click(function(){
+    $('#registeredUser').show();
+    $('#hideUser').show();
+    $('#showUser').hide();
+  })
+  $('#hideUser').click(function(){
+    $('#registeredUser').hide();
+    $('#hideUser').hide();
+    $('#showUser').show();
+  })
+
+
+  $('#userFeedback').hide();
+  $('#hideFeedback').hide();
+  $('#showFeedback').click(function(){
+    $('#userFeedback').show();
+    $('#hideFeedback').show();
+    $('#showFeedback').hide();
+  })
+  $('#hideFeedback').click(function(){
+    $('#userFeedback').hide();
+    $('#hideFeedback').hide();
+    $('#showFeedback').show();
+  })
+
+
+
+
+
+
+
+
 
   $('.login-form').hide();
   $('.login-words').hide();

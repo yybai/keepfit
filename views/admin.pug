@@ -3,10 +3,69 @@ extends layout
 block content
     p admin page
 
-    p#username logged in as : #{adm.username}
+    //- p#username logged in as : #{adm.username}
+    div(id="showUser" style="cursor:pointer" ) show users
+    div(id="hideUser" style="cursor:pointer" ) hide users
+    div#registeredUser
+        p Registered Users:
+        table#user_table
+            tr
+                th username
+                th firstname
+                th lastname
+                th email
+                th age
+                th gender
+                th created date
+                th
+            each u in allusers
+                tr(id=`${u._id}`)
+                    td=u.username
+                    td=u.firstname
+                    td=u.lastname
+                    td=u.email
+                    td=u.age
+                    td=u.gender
+                    td=u.createdAt
+                    td
+                        button(class="deleteUser")(uid = u._id) delete
 
-    div#currentUser
-    
+    br
+    div(id="showFeedback" style="cursor:pointer" ) show feedback
+    div(id="hideFeedback" style="cursor:pointer" ) hide feedback
+    div#userFeedback
+        p User Feedback:
+        table#user_feedback
+            tr
+                th username
+                th message
+                th sent date
+            
+
 
     br
     a#logout(href='/user/logout') Logout
+
+block script
+    script(src="/js/main.js")
+    
+    script.
+
+        $('.deleteUser').click(function(e){
+            const uid = $(this).attr('uid');
+            $.ajax({
+                type:'POST',
+                url:'/user/delete',
+                data:{uid},
+                success:function(res){
+                    if(res.result === 'success'){
+                        window.alert("deleted!");
+                        //- console.log(tid);
+                        
+                        $('#' +uid).remove();
+                        
+                        
+                    }
+                }
+            })
+        })

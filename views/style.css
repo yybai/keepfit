@@ -109,12 +109,13 @@ input[type='password'] {
     box-sizing: border-box;
     height: 55px;
     display: inline-block;
-    border: 3px solid #2F96EF;
+    border: 3px solid black;
     border-radius: 5px;
     padding: 0 15px;
     margin: 10px 0;
     -webkit-transition: .2s;
     transition: .2s;
+    background-color:transparent;
 }
   
 
@@ -123,12 +124,14 @@ input[type='password'] {
     box-sizing: border-box;
     height: 55px;
     display: inline-block;
-    border: 3px solid #2F96EF;
+    /* border: 3px solid #2F96EF; */
+    border: 3px solid black;
     border-radius: 5px;
     padding: 0 15px;
     margin: 10px 0;
     -webkit-transition: .2s;
     transition: .2s;
+    background-color:transparent;
 }
 
 
@@ -192,5 +195,5 @@ lable[class='pass']:before {
 	position:relative;
 	opacity:0;
 	transition:2s;
-	
+	cursor:pointer;
 }

@@ -23,7 +23,7 @@ const StudentsSchema = new Schema({
   ],
 
   
-  // createdAt: { type: Date, default: new Date() },
+  createdAt: { type: Date, default: new Date() },
   
 
   
@@ -33,6 +33,6 @@ const StudentsSchema = new Schema({
 
 StudentsSchema.plugin(passportLocalMongoose);
 
-const Students = mongoose.model('students', StudentsSchema);
+const Students = mongoose.model('keepfitUsers', StudentsSchema);
 
 module.exports = Students;
