@@ -3,6 +3,15 @@
     src:url("/fonts/Fixation.ttf");
 }
 
+#myChart{
+    height:200px;
+    width:100px;
+    border: 1px solid black;
+}
+
+
+
+
 .easyPaginateNav a {padding:5px;}
 .easyPaginateNav a.current {font-weight:bold;text-decoration:underline;}
 

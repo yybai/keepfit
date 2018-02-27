@@ -38,7 +38,8 @@ block content
                     button(class="deleteTotal")(tid = calory._id) delete
     div#showTable show table
     div#hideTable hide table
-
+    div(id="can", style="width:600px;")
+        canvas(id="myChart")
 
 
 
@@ -69,17 +70,108 @@ block script
     //- script(src="http://code.jquery.com/jquery-latest.js")
     //- script(src="https://code.jquery.com/jquery-1.11.1.js")
     script(src="/scripts/socket.io-client/dist/socket.io.js")
-    
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js")
     script(src="/js/main.js")
     
     script.
+        const cal = !{JSON.stringify(calories)};
+        console.log(cal);
+
+        var caldata=[];
+        var callable=[];
+        var dailyTotal = 0;
+        var day = "";
+        var index = 0;
+
+        //inserting calory and date data into graph
+        while(index<cal.length-1){
+            if( (cal[index].createdAt.substring(5,10) !== cal[index+1].createdAt.substring(5,10))  && ( (index+1) < cal.length-1 )   ) {
+                caldata.push(cal[index].calory);
+                callable.push(cal[index].createdAt.substring(5,10));
+                index++;
+            }else if((cal[index].createdAt.substring(5,10) !== cal[index+1].createdAt.substring(5,10)) && ( (index+1) == cal.length-1) ){
+                caldata.push(cal[index].calory);
+                callable.push(cal[index].createdAt.substring(5,10));
+                caldata.push(cal[index+1].calory);
+                callable.push(cal[index+1].createdAt.substring(5,10));
+                index++;
+            }else{
+                
+                for(j=index;j<cal.length-1;j++){
+                    if ( (cal[j].createdAt.substring(5,10) === cal[j+1].createdAt.substring(5,10) )     &&   ((j+1) < cal.length-1)    )   {
+
+                        var v = parseInt(cal[j].calory);
+                        dailyTotal = dailyTotal + v;
+
+                    }else if ( (cal[j].createdAt.substring(5,10) === cal[j+1].createdAt.substring(5,10) )     &&   ((j+1) == cal.length-1)    ){
+                        
+                        var v = parseInt(cal[j].calory);
+                        dailyTotal = dailyTotal + v;
+                        var vl = parseInt(cal[j+1].calory);
+                        dailyTotal = dailyTotal + vl;
+                        var c = dailyTotal.toString();
+                        caldata.push(c);
+                        callable.push(cal[j].createdAt.substring(5,10));
+                        index = j+111;
+                        break;
+                    }else{
+                        var v = parseInt(cal[j].calory);
+                        
+                        dailyTotal = dailyTotal + v;
+                        var c = dailyTotal.toString();
+                        caldata.push(c);
+                        callable.push(cal[j].createdAt.substring(5,10));
+                        index = j+1;
+                        if (index = cal.length-1){
+                            caldata.push(cal[index].calory);
+                            callable.push(cal[index].createdAt.substring(5,10));
+                        }
+                        break;
+                    }    
+                }
+                dailyTotal = 0;
+
+            }
+            
+        }
+        
+
+
+
+        //draw graph
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: callable,
+                datasets: [{
+                    label: 'change of intake calories',
+                    data: caldata,
+                    //- backgroundColor: ['rgba(255,255,255,1)'
+                    //- ],
+                    //- borderColor: [
+                    //-     'rgba(0,0,0,5)'
+                    //- ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                events:['mousemove'],
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+
+
+
+        //submit daily calory to database
         const socket = io();
-        
         const user = !{JSON.stringify(x)};//javascript 拿server pass过来的information
-        //console.log(user);
-        
-
-
         $('#intake-submit').click(function(e) {
 
             socket.emit('daily calory', { calory: $('#forTotal').val(), user: user.username });
@@ -87,6 +179,9 @@ block script
             location.reload();
         })
 
+
+
+        //delete daily calory from database
         $('.deleteTotal').click(function(e){
             const tid = $(this).attr('tid');
             $.ajax({

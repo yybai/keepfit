@@ -11,6 +11,8 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "chart.js": "^2.7.1",
+    "chat.js": "^1.0.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
