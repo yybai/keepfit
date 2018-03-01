@@ -8,6 +8,7 @@ const http = require('http');
 const mongoose = require('mongoose');
 const session = require('express-session')
 var userList =[];
+const nodemailer = require('nodemailer');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

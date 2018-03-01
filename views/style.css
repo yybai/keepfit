@@ -2,6 +2,14 @@
     font-family:fixation;
     src:url("/fonts/Fixation.ttf");
 }
+@font-face{
+    font-family:typolino;
+    src:url("/fonts/Typolino.ttf");
+}
+@font-face{
+    font-family:sansRegular;
+    src:url("/fonts/InriaSans-Regular.ttf");
+}
 
 #myChart{
     height:200px;
@@ -93,15 +101,48 @@ body{
     
 }
 
-
+.login_button{
+    font-family: typolino;
+    font-weight:bold;
+    font-size:30px;
+    float:right;
+    border-radius:10px;
+    border:2px solid black;
+    background-color:transparent;
+    cursor:pointer;
+}
 .login-form{
     margin-left:auto;
     margin-right:auto;
-    padding-top:10%;
-    
+    padding-top:7%;
     width:400px;
-
 }
+.login_back{
+    clear:both;
+    font-family: typolino;
+    font-weight:bold;
+    text-decoration:none;
+    font-size:30px;
+    float:right;
+    margin-top:10px;
+    
+}
+.login_back:visited{
+    color:black;
+}
+.regist:visited{
+    color:black;
+}
+.regist{
+    margin-top:10px;
+    clear:both;
+    font-family: typoLino;
+    font-weight:bold;
+    text-decoration:none;
+    font-size:30px;
+    float:right;
+}
+
 
 
 
@@ -177,7 +218,7 @@ lable[class='pass']:before {
     font-family: Strawberry_Blossom;
 	/*font-weight: bold;*/
 	font-size:200px;
-
+    cursor:default;
 	text-align: center;
 	position:relative;
 
@@ -195,14 +236,45 @@ lable[class='pass']:before {
 	font-family : Strawberry_Blossom;
 	src:url(../fonts/Strawberry_Blossom.otf);
 }
+
+._blank{
+    height:180px;;
+}
+._blank2{
+    height:50px;
+}
 .welcome_words{
 	font-family: Strawberry_Blossom;
-	/*font-weight: bold;*/
-	font-size:200px;
-	padding-top:23%;
+    font-size:200px;
+    width:580px;
+    height:200px;
+    margin-left:auto;
+    margin-right:auto;
+    /* padding-top:17%; */
+    /* border:1px red solid; */
 	text-align: center;
 	position:relative;
 	opacity:0;
 	transition:2s;
 	cursor:pointer;
+}
+.welcome_intro{
+    font-family: Strawberry_Blossom;
+    font-size:200px;
+    text-align: center;
+    width:620px;
+    height:200px;
+    cursor:pointer;
+    opacity:0;
+    transition:2s;
+    margin-left:auto;
+    margin-right:auto;
+}
+.welcome_intro:hover{
+    font-size:210px;
+    transition:0.5s;
+}
+.welcome_words:hover{
+    font-size:210px;
+    transition:0.5s;
 }

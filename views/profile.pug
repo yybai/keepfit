@@ -66,15 +66,18 @@ block content
     a#logout(href='/user/logout') Logout
 
 block script
-    
-    //- script(src="http://code.jquery.com/jquery-latest.js")
-    //- script(src="https://code.jquery.com/jquery-1.11.1.js")
     script(src="/scripts/socket.io-client/dist/socket.io.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js")
     script(src="/js/main.js")
     
     script.
         const cal = !{JSON.stringify(calories)};
+        const user = !{JSON.stringify(x)};
+        const r = !{JSON.stringify(result)};
+
+
+
+
         console.log(cal);
 
         var caldata=[];
@@ -82,27 +85,28 @@ block script
         var dailyTotal = 0;
         var day = "";
         var index = 0;
-
+        var healthyCal = [];
+        console.log(callable);
         //inserting calory and date data into graph
         while(index<cal.length-1){
             if( (cal[index].createdAt.substring(5,10) !== cal[index+1].createdAt.substring(5,10))  && ( (index+1) < cal.length-1 )   ) {
                 caldata.push(cal[index].calory);
                 callable.push(cal[index].createdAt.substring(5,10));
+                healthyCal.push(r);
                 index++;
             }else if((cal[index].createdAt.substring(5,10) !== cal[index+1].createdAt.substring(5,10)) && ( (index+1) == cal.length-1) ){
                 caldata.push(cal[index].calory);
                 callable.push(cal[index].createdAt.substring(5,10));
+                healthyCal.push(r);
                 caldata.push(cal[index+1].calory);
                 callable.push(cal[index+1].createdAt.substring(5,10));
+                healthyCal.push(r);
                 index++;
-            }else{
-                
+            }else{ 
                 for(j=index;j<cal.length-1;j++){
                     if ( (cal[j].createdAt.substring(5,10) === cal[j+1].createdAt.substring(5,10) )     &&   ((j+1) < cal.length-1)    )   {
-
                         var v = parseInt(cal[j].calory);
                         dailyTotal = dailyTotal + v;
-
                     }else if ( (cal[j].createdAt.substring(5,10) === cal[j+1].createdAt.substring(5,10) )     &&   ((j+1) == cal.length-1)    ){
                         
                         var v = parseInt(cal[j].calory);
@@ -112,6 +116,7 @@ block script
                         var c = dailyTotal.toString();
                         caldata.push(c);
                         callable.push(cal[j].createdAt.substring(5,10));
+                        healthyCal.push(r);
                         index = j+111;
                         break;
                     }else{
@@ -121,10 +126,13 @@ block script
                         var c = dailyTotal.toString();
                         caldata.push(c);
                         callable.push(cal[j].createdAt.substring(5,10));
+                        healthyCal.push(r);
                         index = j+1;
-                        if (index = cal.length-1){
+                        if (index == cal.length-1){
                             caldata.push(cal[index].calory);
                             callable.push(cal[index].createdAt.substring(5,10));
+                            healthyCal.push(r);
+                            index = 99999;
                         }
                         break;
                     }    
@@ -134,6 +142,7 @@ block script
             }
             
         }
+        console.log(callable);
         
 
 
@@ -145,20 +154,36 @@ block script
             data: {
                 labels: callable,
                 datasets: [{
-                    label: 'change of intake calories',
+                    label: 'Intake Calories',
                     data: caldata,
                     //- backgroundColor: ['rgba(255,255,255,1)'
                     //- ],
                     //- borderColor: [
                     //-     'rgba(0,0,0,5)'
                     //- ],
-                    borderWidth: 1
-                }]
+                    
+                    borderColor:'rgba(0,0,0,1)',
+                    borderWidth: 1,
+                    fill:false
+                },{
+                    label: 'GOAL for the day',
+                    data: healthyCal,
+                    borderColor:'rgba(255,0,17,1)',
+                    borderWidth: 1,
+                    fill:false
+
+                }
+                
+                ]
             },
             options: {
-                events:['mousemove'],
+                events:['mousemove','touched'],
+                tooltips:{
+                    mode:'index',
+                },
                 scales: {
                     yAxes: [{
+                        
                         ticks: {
                             beginAtZero:true
                         }
@@ -171,9 +196,7 @@ block script
 
         //submit daily calory to database
         const socket = io();
-        const user = !{JSON.stringify(x)};//javascript 拿server pass过来的information
         $('#intake-submit').click(function(e) {
-
             socket.emit('daily calory', { calory: $('#forTotal').val(), user: user.username });
             window.alert("saved to database!");
             location.reload();

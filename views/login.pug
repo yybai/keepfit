@@ -3,7 +3,10 @@ extends layout
 block content
 
   img(class="welcome-bg" src="/images/fruit-background.jpg")
+  div(class="_blank")
   div(class="welcome_words") Get s0arted
+  div(class="_blank2")
+  div(class="welcome_intro") What we do
 
 
   div(class="login-words") Log in
@@ -12,12 +15,12 @@ block content
     br
     input(name="password", type="password", placeholder="Password")
     br
-    input(type="submit", value="Login")
+    input(class="login_button" type="submit", value="Login")
     br
-    a(href="/user/signup") Don't have account ?
+    a(class="regist" href="/user/signup") REGIST
 
     br
-    a(href="/") back
+    a(class="login_back" href="/") BACK
 
 
 

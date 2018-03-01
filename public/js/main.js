@@ -44,13 +44,6 @@ $( document ).ready(function() {
   })
 
 
-
-
-
-
-
-
-
   $('.login-form').hide();
   $('.login-words').hide();
   $('#paging').hide();
@@ -68,19 +61,8 @@ $( document ).ready(function() {
   })
 
 
-  // $('#searchResult').easyPaginate({
-  //   paginateElement: 'div',
-  //   elementsPerPage: 3,
-  //   effect: 'climb'
-  // });
-
-
-
-
-
-
-
   $(".welcome_words").animate({opacity: 1});
+  $(".welcome_intro").animate({opacity: 1});
 
   var total_cal = 0;
   var intake_list = [];
@@ -149,9 +131,13 @@ $( document ).ready(function() {
     $(".welcome_words").hide();
     $('.login-form').show();
     $('.login-words').show();
+    $('.welcome_intro').hide();
     blurElement(".welcome-bg",10);
+    $('._blank').hide();
   })
-
+  $('.welcome_intro').click(function(){
+    window.location.replace("/intro");
+  })
 
 
 
