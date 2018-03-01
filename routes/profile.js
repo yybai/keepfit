@@ -2,12 +2,43 @@ const express = require('express');
 const router = express.Router();
 const Users = require('../models/students');
 const Calories = require('../models/calory');
+var nodemailer = require('nodemailer');
+var mailTransport = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    secureConnection:true,
+    auth:{
+        user:'leo.test.no.reply@gmail.com',
+        pass:'1992taozi'
+    }
+})
 
 
 
 
+router.get('/send/:uname/:email/:msg',function(req,res,next){
+    var username = req.params.uname;
+    var userEmail = req.params.email;
+    var msg = req.params.msg;
 
+    var options = {
+        from :' "Keepfit Admin" <leo.test.no.reply@gmail.com> ',
+        to :`"${username}" <${userEmail}>`,
+        subject:'KEEPFIT REPLY',
+        text:'reply',
+        html:`<p>DO NOT REPLY</p><br><p>${msg}</p>`
+    };
+    mailTransport.sendMail(options,function(err,msg){
+        if(err){
+            console.log(err);
 
+            res.redirect('/profile');
+        }else{
+            console.log(msg);
+            
+            res.redirect(200,'/profile');
+        }
+    });
+});
 
 
 
@@ -19,14 +50,11 @@ router.get('/', (req, res, next) => {
 
 
             Users.find({},(err,allusers)=>{
+                
                 res.render('admin',{allusers,adm:req.user})
             })
     
     
-            // res.render('admin',{
-            //     adm:req.user
-                
-            // })
         }else{
 
             var u = req.user.username;

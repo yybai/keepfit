@@ -18,6 +18,7 @@ block content
                 th gender
                 th created date
                 th
+                th
             each u in allusers
                 tr(id=`${u._id}`)
                     td=u.username
@@ -29,6 +30,12 @@ block content
                     td=u.createdAt
                     td
                         button(class="deleteUser")(uid = u._id) delete
+                    td
+                        button(class="openReply")(umail = u.email,uname=u.username)  reply
+        div#sendmailTo
+            p#mailIntro
+            textarea(id="msg" rows = "5" cols="50")
+            button(id="sendReply") send
 
     br
     div(id="showFeedback" style="cursor:pointer" ) show feedback
@@ -41,7 +48,7 @@ block content
                 th message
                 th sent date
             
-
+    a(href='/profile/send') send mail
 
     br
     a#logout(href='/user/logout') Logout
@@ -50,7 +57,27 @@ block script
     script(src="/js/main.js")
     
     script.
-
+        $('#sendmailTo').hide();
+        var uname = "";
+        var email = "";
+        var msg = "";
+        $('.openReply').click(function(){
+            uname = $(this).attr('uname');
+            email = $(this).attr('umail');
+            $('#sendmailTo').show();
+            $('#mailIntro').html("Sending response to: " + uname);
+            $('#msg').html("Dear user: " + uname + ',');
+            
+        })
+        $('#sendReply').click(function(){
+            console.log(uname);
+            console.log(email);
+            msg = ($('#msg').val());
+            console.log(msg);
+            window.location.replace('/profile/send?uname='+uname+'&email='+email+'&msg='+msg);
+        })
+        
+        
         $('.deleteUser').click(function(e){
             const uid = $(this).attr('uid');
             $.ajax({
