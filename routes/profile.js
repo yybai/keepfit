@@ -35,7 +35,7 @@ router.get('/send/:uname/:email/:msg',function(req,res,next){
         }else{
             console.log(msg);
             
-            res.redirect(200,'/profile');
+            res.redirect('/profile?stat=ok');
         }
     });
 });

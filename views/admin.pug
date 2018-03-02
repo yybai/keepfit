@@ -48,7 +48,6 @@ block content
                 th message
                 th sent date
             
-    a(href='/profile/send') send mail
 
     br
     a#logout(href='/user/logout') Logout
@@ -57,6 +56,20 @@ block script
     script(src="/js/main.js")
     
     script.
+
+
+        var q = window.location.search.substring(1);
+        if(q ==="stat=ok"){
+            window.alert("Email sent!");
+            window.location.replace("/profile");
+        }
+        
+
+
+
+
+
+
         $('#sendmailTo').hide();
         var uname = "";
         var email = "";
@@ -74,7 +87,7 @@ block script
             console.log(email);
             msg = ($('#msg').val());
             console.log(msg);
-            window.location.replace('/profile/send?uname='+uname+'&email='+email+'&msg='+msg);
+            window.location.replace('/profile/send/'+uname+'/'+email+'/'+msg);
         })
         
         

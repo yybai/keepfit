@@ -78,7 +78,7 @@ block script
 
 
 
-        console.log(cal);
+        //- console.log(cal);
 
         var caldata=[];
         var callable=[];
@@ -88,58 +88,67 @@ block script
         var healthyCal = [];
         console.log(callable);
         //inserting calory and date data into graph
-        while(index<cal.length-1){
-            if( (cal[index].createdAt.substring(5,10) !== cal[index+1].createdAt.substring(5,10))  && ( (index+1) < cal.length-1 )   ) {
+        while(index<cal.length-1 ||  cal.length == 1 ){
+            if(cal.length == 1){
+                console.log(cal);
                 caldata.push(cal[index].calory);
                 callable.push(cal[index].createdAt.substring(5,10));
                 healthyCal.push(r);
-                index++;
-            }else if((cal[index].createdAt.substring(5,10) !== cal[index+1].createdAt.substring(5,10)) && ( (index+1) == cal.length-1) ){
-                caldata.push(cal[index].calory);
-                callable.push(cal[index].createdAt.substring(5,10));
-                healthyCal.push(r);
-                caldata.push(cal[index+1].calory);
-                callable.push(cal[index+1].createdAt.substring(5,10));
-                healthyCal.push(r);
-                index++;
-            }else{ 
-                for(j=index;j<cal.length-1;j++){
-                    if ( (cal[j].createdAt.substring(5,10) === cal[j+1].createdAt.substring(5,10) )     &&   ((j+1) < cal.length-1)    )   {
-                        var v = parseInt(cal[j].calory);
-                        dailyTotal = dailyTotal + v;
-                    }else if ( (cal[j].createdAt.substring(5,10) === cal[j+1].createdAt.substring(5,10) )     &&   ((j+1) == cal.length-1)    ){
-                        
-                        var v = parseInt(cal[j].calory);
-                        dailyTotal = dailyTotal + v;
-                        var vl = parseInt(cal[j+1].calory);
-                        dailyTotal = dailyTotal + vl;
-                        var c = dailyTotal.toString();
-                        caldata.push(c);
-                        callable.push(cal[j].createdAt.substring(5,10));
-                        healthyCal.push(r);
-                        index = j+111;
-                        break;
-                    }else{
-                        var v = parseInt(cal[j].calory);
-                        
-                        dailyTotal = dailyTotal + v;
-                        var c = dailyTotal.toString();
-                        caldata.push(c);
-                        callable.push(cal[j].createdAt.substring(5,10));
-                        healthyCal.push(r);
-                        index = j+1;
-                        if (index == cal.length-1){
-                            caldata.push(cal[index].calory);
-                            callable.push(cal[index].createdAt.substring(5,10));
+                break;
+            }else{
+                if( (cal[index].createdAt.substring(5,10) !== cal[index+1].createdAt.substring(5,10))  && ( (index+1) < cal.length-1 )   ) {
+                    caldata.push(cal[index].calory);
+                    callable.push(cal[index].createdAt.substring(5,10));
+                    healthyCal.push(r);
+                    index++;
+                }else if((cal[index].createdAt.substring(5,10) !== cal[index+1].createdAt.substring(5,10)) && ( (index+1) == cal.length-1) ){
+                    caldata.push(cal[index].calory);
+                    callable.push(cal[index].createdAt.substring(5,10));
+                    healthyCal.push(r);
+                    caldata.push(cal[index+1].calory);
+                    callable.push(cal[index+1].createdAt.substring(5,10));
+                    healthyCal.push(r);
+                    index++;
+                }else{ 
+                    for(j=index;j<cal.length-1;j++){
+                        if ( (cal[j].createdAt.substring(5,10) === cal[j+1].createdAt.substring(5,10) )     &&   ((j+1) < cal.length-1)    )   {
+                            var v = parseInt(cal[j].calory);
+                            dailyTotal = dailyTotal + v;
+                        }else if ( (cal[j].createdAt.substring(5,10) === cal[j+1].createdAt.substring(5,10) )     &&   ((j+1) == cal.length-1)    ){
+                            
+                            var v = parseInt(cal[j].calory);
+                            dailyTotal = dailyTotal + v;
+                            var vl = parseInt(cal[j+1].calory);
+                            dailyTotal = dailyTotal + vl;
+                            var c = dailyTotal.toString();
+                            caldata.push(c);
+                            callable.push(cal[j].createdAt.substring(5,10));
                             healthyCal.push(r);
-                            index = 99999;
-                        }
-                        break;
-                    }    
-                }
-                dailyTotal = 0;
+                            index = j+111;
+                            break;
+                        }else{
+                            var v = parseInt(cal[j].calory);
+                            
+                            dailyTotal = dailyTotal + v;
+                            var c = dailyTotal.toString();
+                            caldata.push(c);
+                            callable.push(cal[j].createdAt.substring(5,10));
+                            healthyCal.push(r);
+                            index = j+1;
+                            if (index == cal.length-1){
+                                caldata.push(cal[index].calory);
+                                callable.push(cal[index].createdAt.substring(5,10));
+                                healthyCal.push(r);
+                                index = 99999;
+                            }
+                            break;
+                        }    
+                    }
+                    dailyTotal = 0;
 
+                }
             }
+
             
         }
         console.log(callable);
