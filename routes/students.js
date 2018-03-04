@@ -14,6 +14,17 @@ router.post('/update/:id', (req, res, next) => {
     }
   })
 })
+router.post('/update/weight/:id/:weight',(req,res,next)=>{
+  var uid = req.params.id;
+  var uweight = req.params.weight;
+  Students.update({_id:uid},{$set:{weight:uweight}},err=>{
+    if(err){
+      res.send(err)
+    }else{
+      res.json({ result: 'success' })
+    }
+  })
+})
 
 //handle delete daily total from database
 router.post('/delete', (req, res, next) => {

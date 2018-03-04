@@ -86,15 +86,7 @@ router.get('/', (req, res, next) => {
     }
 
 
-    
 
-    // if(req.user){
-
-    //     // console.log(req.user.calory)
-    //     // res.render('profile', { x: req.user,
-    //     //                         calories,
-    //     //                         result })
-    // }
 
 });
 

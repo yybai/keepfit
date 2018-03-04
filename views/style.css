@@ -17,15 +17,15 @@
     border: 1px solid black;
 }
 
-
+.w_class{
+    border:1px solid black;
+}
 
 
 .easyPaginateNav a {padding:5px;}
 .easyPaginateNav a.current {font-weight:bold;text-decoration:underline;}
 
-body{
-    background-color:rgb(230, 230, 230);
-}
+
 .navbar{
     text-align:center;
 }
@@ -141,6 +141,28 @@ body{
     text-decoration:none;
     font-size:30px;
     float:right;
+}
+.profile_bg{
+    background-image :url("/images/profileBG.jpg");
+    max-width:2000px;
+    height:340px;
+    /* border:1px solid black; */
+    overflow: hidden;
+    opacity:1;
+    margin-left:auto;
+    margin-right:auto;
+    /* margin-top:-30px; */
+}
+#main{
+    width:1500px;
+    border:1px solid black;
+    margin-left:auto;
+    margin-right:auto;
+}
+#nav{
+    margin-left:1300px;
+    margin-top:50px;
+
 }
 
 

@@ -1,69 +1,81 @@
 extends layout
 
 block content
-    if (x)
+    div(class="profile_bg" )
+        div#nav
+            span#greeting
+            span#user #{x.username}
+            a#logout(href='/user/logout') Logout
+    //- img(class="profile_bg" src="/images/profileBG.jpg")
+    div#main
+        if (x)
+            div#personalInfo
+                p#username logged in as : #{x.username}   
+                p#firstname first name : #{x.firstname}   
+                p#lastname last name : #{x.lastname}   
+                p#email email : #{x.email}   
+                p#age age : #{x.age}   
+                p#height height : #{x.height} cm
+                
+                p#weight weight : #{x.weight} kg
+                span(id="showUpdate" class="w_class") UPDATE WEIGHT
+                div#changeWeight
+                    input(id="weightInput" placeholder = "enter new weight")
+                    span(id="submitWeight" class="w_class") update weight
+                    span(id="cancelWeight" class="w_class" style="margin-left:5px") cancel
+                p#gender gender : #{x.gender}   
+
+
+
+                a#edit(href='/profile/edit') EDIT PROFILE
+
+                p#suggestion by info, the number of calories for you is : #{result} per day.
         
-        p#username logged in as : #{x.username}   
-        p#firstname first name : #{x.firstname}   
-        p#lastname last name : #{x.lastname}   
-        p#email email : #{x.email}   
-        p#age age : #{x.age}   
-        p#height height : #{x.height} cm
-        p#weight weight : #{x.weight} kg  
-        p#gender gender : #{x.gender}   
+        p(class="intake-input") What did you eat today?
+        div#dailyResult
+        div#dailyTotal
+
+        table#result_table
+            tr
+                th user
+                th calory
+                th createdAt
+                th
+            each calory in calories
+                tr(id=`${calory._id}`)
+                    td=calory.user
+                    td=calory.calory
+                    td=calory.createdAt
+                    td
+                        button(class="deleteTotal")(tid = calory._id) delete
+        div#showTable show table
+        div#hideTable hide table
+        div(id="can", style="width:600px;")
+            canvas(id="myChart")
 
 
 
-        a#edit(href='/profile/edit') EDIT PROFILE
+        input(id = "forTotal", style = "visibility:hidden")
+        div#input_form
+            select(name="ds",class="input-ds" id = "ds")
+                option(value="ads" selected="selected") From All Data Source
+                option(value="Standard Reference") Standard Reference
+                option(value="Branded Food Products") Branded Food Products
+            input(id="intakeInputBox")
+            span
+                button#intake-search search
+            span
+                button#intake-submit submit
+
+
+        div#searchResult
         br
-    br
-    p#suggestion by info, the number of calories for you is : #{result} per day.
-    
-    p(class="intake-input") What did you eat today?
-    div#dailyResult
-    div#dailyTotal
-
-    table#result_table
-        tr
-            th user
-            th calory
-            th createdAt
-            th
-        each calory in calories
-            tr(id=`${calory._id}`)
-                td=calory.user
-                td=calory.calory
-                td=calory.createdAt
-                td
-                    button(class="deleteTotal")(tid = calory._id) delete
-    div#showTable show table
-    div#hideTable hide table
-    div(id="can", style="width:600px;")
-        canvas(id="myChart")
-
-
-
-    input(id = "forTotal", style = "visibility:hidden")
-    div#input_form
-        select(name="ds",class="input-ds" id = "ds")
-            option(value="ads" selected="selected") From All Data Source
-            option(value="Standard Reference") Standard Reference
-            option(value="Branded Food Products") Branded Food Products
-        input(id="intakeInputBox")
-        span
-            button#intake-search search
-        span
-            button#intake-submit submit
-
-
-    div#searchResult
-    br
-    br
-    br
-    a#gochat(href='/chat') Chat
-    br
-    br
-    a#logout(href='/user/logout') Logout
+        br
+        br
+        a#gochat(href='/chat') Chat
+        br
+        br
+        a#logout(href='/user/logout') Logout
 
 block script
     script(src="/scripts/socket.io-client/dist/socket.io.js")
@@ -211,7 +223,23 @@ block script
             location.reload();
         })
 
-
+        $('#submitWeight').click(function(){
+            var newWeight = $('#weightInput').val();
+            $.ajax({
+                type:'POST',
+                url:'/students/update/weight/'+user._id+'/'+newWeight,
+                success:function(res){
+                    if(res.result === 'success'){
+                        window.alert("Updated!");
+                        //- $('#weight').html("weight : "+newWeight+" kg")
+                        //- $('#showUpdate').show();
+                        //- $('#changeWeight').hide();
+                        location.reload();
+                    }
+                }
+            })
+            
+        })
 
         //delete daily calory from database
         $('.deleteTotal').click(function(e){

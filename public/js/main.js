@@ -16,6 +16,17 @@ function blurElement(element, size) {
 
 $( document ).ready(function() {
 
+
+  $('#changeWeight').hide();
+  $('#showUpdate').click(function(){
+    $('#changeWeight').show();
+    $('#showUpdate').hide();
+  })
+  $('#cancelWeight').click(function(){
+    $('#changeWeight').hide();
+    $('#showUpdate').show();
+  })
+
   $('#registeredUser').hide();
   $('#hideUser').hide();
   $('#showUser').click(function(){
@@ -64,9 +75,33 @@ $( document ).ready(function() {
   $(".welcome_words").animate({opacity: 1});
   $(".welcome_intro").animate({opacity: 1});
 
+
+  var t = new Date();
+  console.log(t.getHours());
+  if(t.getHours() <12){
+    $('#greeting').html("Good Morning! ");
+  }else if(t.getHours() <18){
+    $('#greeting').html("Good Afternoon! ");
+  }else{
+    $('#greeting').html("Good Evening!");
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
   var total_cal = 0;
   var intake_list = [];
   var nutrion = 0 ;
+
   $('#intake-search').click(function(){
     var q = document.getElementById("intakeInputBox").value;
     var ds = document.getElementById("ds").value;
@@ -99,7 +134,7 @@ $( document ).ready(function() {
 
 
   })
-  $("div").on("click",".container",function(){
+  $("#searchResult").on("click",".container",function(){
     console.log(  $(this).attr('id')  );
     var ndbno = $(this).attr('id');
     $.ajax({
