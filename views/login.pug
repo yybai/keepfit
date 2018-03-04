@@ -10,16 +10,34 @@ block content
 
 
   div(class="login-words") Log in
-  form(method="POST", action="/user/login", class="login-form")
-    input(name="username",class="input-name" ,placeholder="Username")
-    br
-    input(name="password", type="password", placeholder="Password")
-    br
-    input(class="login_button" type="submit", value="Login")
-    br
-    a(class="regist" href="/user/signup") REGIST
+  form(method="POST", action="/user/login", class="form")
+    div(class="form__content")
+      div(class="styled-input")
+        input(name="username",class="styled-input__input")
+        div(class="styled-input__placeholder")
+          span(class="styled-input__placeholder-text") Username
+        div(class="styled-input__circle")
 
-    br
+
+      div(class="styled-input") 
+        input(name="password", type="password", class="styled-input__input" autocomplete="new-password")
+        div(class="styled-input__placeholder")
+          span(class="styled-input__placeholder-text") Password
+        div(class="styled-input__circle")
+
+      button(type="submit" class= "styled-button")
+        span(class="styled-button___real-text-holder")
+          span(class="styled-button__real-text") Login
+          span(class="styled-button__moving-block face")
+            span(class="styled-button__text-holder")
+              span(class="styled-button__text") Login
+          span(class="styled-button__moving-block back")
+            span(class="styled-button__text-holder")
+              span(class="styled-button__text") Login
+      
+
+  div#registBACK
+    a(class="regist" href="/user/signup") REGIST
     a(class="login_back" href="/") BACK
 
 
