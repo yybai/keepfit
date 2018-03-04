@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const CalorySchema = new Schema({
 
     user: String,
-    
+    weight:Number,
     calory:Number,
     createdAt: { type: Date, default: Date.now }
 })

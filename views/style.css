@@ -29,9 +29,13 @@
 .navbar{
     text-align:center;
 }
-/* #signupHeader{
-    text-align:center;
-} */
+#showTable{
+    border:1px solid black;
+}
+#hideTable{
+    border:1px solid black;
+}
+
 .header-image-div{
     margin-left:auto;
     margin-right:auto;
@@ -155,14 +159,28 @@
 }
 #main{
     width:1500px;
-    border:1px solid black;
+    border:1px solid red;
     margin-left:auto;
     margin-right:auto;
 }
 #nav{
     margin-left:1300px;
     margin-top:50px;
+}
+#userInfo{
+    width:600px;
+    border:1px solid blue;
+    margin-left:20px;
 
+}
+#graphInfo{
+    border:1px solid black;
+    width:610px;
+    position:absolute;
+    margin-left:190px;
+}
+#userInfo, #graphInfo{
+    display:inline-block;
 }
 
 

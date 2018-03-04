@@ -13,14 +13,10 @@ const StudentsSchema = new Schema({
   gender:String,
 
 
-
-  //想在Database每个用户里面存一个list，然后每天都可以往里面存卡路里值，最后我想实现的是，calory[0].createdAt = 2018/2/21 然后calory[0].calories = 516， calory[1]=2018/2/22 ………
-  //之后我就可以在HTML里面展示出一周或者一个月来calory的变化
-  //现在问题是，我这么写，然后user sign up的时候，我不知道如何给calory list数据，不知道怎么declare它，所以在HTML里都显示空的 而且calory.createdAt都是undefined
-  calory:[
-    {createdAt: { type: Date, default: new Date() }},
-    {calories:Number}
-  ],
+  // calory:[
+  //   {createdAt: { type: Date, default: new Date() }},
+  //   {calories:Number}
+  // ],
 
   
   createdAt: { type: Date, default: new Date() },

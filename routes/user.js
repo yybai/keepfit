@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Students = require('../models/students');
 const passport = require('passport');
+const Calories = require('../models/calory');
 
 
 // var userList = [];
@@ -56,6 +57,27 @@ router.post('/delete', (req, res, next) => {
     }
   })
 })
+
+router.post('/save/calory/:username/:weight/:calory',(req,res,next)=>{
+  var _user = req.params.username;
+  var _weight = req.params.weight;
+  var _calory = req.params.calory;
+  var newCalries = new Calories({user:_user,  weight:_weight,  calory:_calory});
+  newCalries.save(err =>{
+    if (err){ 
+      res.send(err)
+    }
+    else{
+      res.json({ result: 'success' })
+    }
+  })
+})
+
+
+
+
+
+
 
 
 router.get('/logout', (req, res) => {

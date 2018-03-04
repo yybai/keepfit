@@ -16,7 +16,7 @@ function blurElement(element, size) {
 
 $( document ).ready(function() {
 
-
+  
   $('#changeWeight').hide();
   $('#showUpdate').click(function(){
     $('#changeWeight').show();

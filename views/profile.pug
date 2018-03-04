@@ -8,77 +8,85 @@ block content
             a#logout(href='/user/logout') Logout
     //- img(class="profile_bg" src="/images/profileBG.jpg")
     div#main
-        if (x)
-            div#personalInfo
-                p#username logged in as : #{x.username}   
-                p#firstname first name : #{x.firstname}   
-                p#lastname last name : #{x.lastname}   
-                p#email email : #{x.email}   
-                p#age age : #{x.age}   
-                p#height height : #{x.height} cm
-                
-                p#weight weight : #{x.weight} kg
-                span(id="showUpdate" class="w_class") UPDATE WEIGHT
-                div#changeWeight
-                    input(id="weightInput" placeholder = "enter new weight")
-                    span(id="submitWeight" class="w_class") update weight
-                    span(id="cancelWeight" class="w_class" style="margin-left:5px") cancel
-                p#gender gender : #{x.gender}   
+        div#userInfo
+            if (x)
+                div#personalInfo
+                    p#username logged in as : #{x.username}   
+                    p#firstname first name : #{x.firstname}   
+                    p#lastname last name : #{x.lastname}   
+                    p#email email : #{x.email}   
+                    p#age age : #{x.age}   
+                    p#height height : #{x.height} cm
+                    
+                    p#weight weight : #{x.weight} kg
+                    span(id="showUpdate" class="w_class") UPDATE WEIGHT
+                    div#changeWeight
+                        input(id="weightInput" placeholder = "enter new weight")
+                        span(id="submitWeight" class="w_class") update weight
+                        span(id="cancelWeight" class="w_class" style="margin-left:5px") cancel
+                    p#gender gender : #{x.gender}   
 
 
 
-                a#edit(href='/profile/edit') EDIT PROFILE
+                    a#edit(href='/profile/edit') EDIT PROFILE
 
-                p#suggestion by info, the number of calories for you is : #{result} per day.
+                    p#suggestion by info, the number of calories for you is : #{result} per day.
+            
+            p(class="intake-input") What did you eat today?
+            div#dailyResult
+            div#dailyTotal
+
+            table(id="result_table" border="1")
+                tr
+                    th user
+                    th calory
+                    th weight
+                    th createdAt
+                    th
+                each calory in calories
+                    tr(id=`${calory._id}`)
+                        td=calory.user
+                        td=calory.calory
+                        td=calory.weight
+                        td=calory.createdAt
+                        td
+                            button(class="deleteTotal")(tid = calory._id) delete
+            span#showTable show table
+            span#hideTable hide table
+            
+
+
+            input(id = "forTotal", style = "visibility:hidden")
+            div#input_form
+                select(name="ds",class="input-ds" id = "ds")
+                    option(value="ads" selected="selected") From All Data Source
+                    option(value="Standard Reference") Standard Reference
+                    option(value="Branded Food Products") Branded Food Products
+                input(id="intakeInputBox")
+                span
+                    button#intake-search search
+                span
+                    button#intake-submit submit
+
+            div#searchResult
+        div#graphInfo
+            
+            div(id="forCal", style="width:600px;")
+                canvas(id="calChart")
+            div(id='forWeight',style="width:600px;")
+                canvas(id="weightChart")
         
-        p(class="intake-input") What did you eat today?
-        div#dailyResult
-        div#dailyTotal
-
-        table#result_table
-            tr
-                th user
-                th calory
-                th createdAt
-                th
-            each calory in calories
-                tr(id=`${calory._id}`)
-                    td=calory.user
-                    td=calory.calory
-                    td=calory.createdAt
-                    td
-                        button(class="deleteTotal")(tid = calory._id) delete
-        div#showTable show table
-        div#hideTable hide table
-        div(id="can", style="width:600px;")
-            canvas(id="myChart")
-
-
-
-        input(id = "forTotal", style = "visibility:hidden")
-        div#input_form
-            select(name="ds",class="input-ds" id = "ds")
-                option(value="ads" selected="selected") From All Data Source
-                option(value="Standard Reference") Standard Reference
-                option(value="Branded Food Products") Branded Food Products
-            input(id="intakeInputBox")
-            span
-                button#intake-search search
-            span
-                button#intake-submit submit
-
-
-        div#searchResult
-        br
-        br
-        br
-        a#gochat(href='/chat') Chat
-        br
-        br
-        a#logout(href='/user/logout') Logout
+    
+    br
+    br
+    br
+    a#gochat(href='/chat') Chat
+    br
+    br
+    a#logout(href='/user/logout') Logout
 
 block script
-    script(src="/scripts/socket.io-client/dist/socket.io.js")
+    //- script(src="/scripts/socket.io-client/dist/socket.io.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js")
     script(src="/js/main.js")
     
@@ -93,6 +101,7 @@ block script
         //- console.log(cal);
 
         var caldata=[];
+        var weightdata=[];
         var callable=[];
         var dailyTotal = 0;
         var day = "";
@@ -106,12 +115,14 @@ block script
                 caldata.push(cal[index].calory);
                 callable.push(cal[index].createdAt.substring(5,10));
                 healthyCal.push(r);
+                weightdata.push(cal[index].weight);
                 break;
             }else{
                 if( (cal[index].createdAt.substring(5,10) !== cal[index+1].createdAt.substring(5,10))  && ( (index+1) < cal.length-1 )   ) {
                     caldata.push(cal[index].calory);
                     callable.push(cal[index].createdAt.substring(5,10));
                     healthyCal.push(r);
+                    weightdata.push(cal[index].weight);
                     index++;
                 }else if((cal[index].createdAt.substring(5,10) !== cal[index+1].createdAt.substring(5,10)) && ( (index+1) == cal.length-1) ){
                     caldata.push(cal[index].calory);
@@ -120,6 +131,8 @@ block script
                     caldata.push(cal[index+1].calory);
                     callable.push(cal[index+1].createdAt.substring(5,10));
                     healthyCal.push(r);
+                    weightdata.push(cal[index].weight);
+                    weightdata.push(cal[index+1].weight);
                     index++;
                 }else{ 
                     for(j=index;j<cal.length-1;j++){
@@ -135,6 +148,7 @@ block script
                             var c = dailyTotal.toString();
                             caldata.push(c);
                             callable.push(cal[j].createdAt.substring(5,10));
+                            weightdata.push(cal[j+1].weight);
                             healthyCal.push(r);
                             index = j+111;
                             break;
@@ -145,11 +159,13 @@ block script
                             var c = dailyTotal.toString();
                             caldata.push(c);
                             callable.push(cal[j].createdAt.substring(5,10));
+                            weightdata.push(cal[j].weight);
                             healthyCal.push(r);
                             index = j+1;
                             if (index == cal.length-1){
                                 caldata.push(cal[index].calory);
                                 callable.push(cal[index].createdAt.substring(5,10));
+                                weightdata.push(cal[index].weight);
                                 healthyCal.push(r);
                                 index = 99999;
                             }
@@ -164,12 +180,14 @@ block script
             
         }
         console.log(callable);
+        console.log(weightdata);
         
 
 
 
         //draw graph
-        var ctx = document.getElementById("myChart").getContext('2d');
+        var ctx = document.getElementById("calChart").getContext('2d');
+        var ctx2 = document.getElementById("weightChart").getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -214,14 +232,71 @@ block script
         });
 
 
+        var myChart = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: callable,
+                datasets: [{
+                    label: 'Weights',
+                    data: weightdata,
+                    borderColor:'rgba(0,0,0,1)',
+                    borderWidth: 1,
+                    fill:false
+                }
+                ]
+            },
+            options: {
+                events:['mousemove','touched'],
+                tooltips:{
+                    mode:'index',
+                },
+                scales: {
+                    yAxes: [{
+                        
+                        ticks: {
+                            beginAtZero:false
+                        }
+                    }]
+                }
+            }
+        });
+        
+
+
 
         //submit daily calory to database
-        const socket = io();
-        $('#intake-submit').click(function(e) {
-            socket.emit('daily calory', { calory: $('#forTotal').val(), user: user.username });
-            window.alert("saved to database!");
-            location.reload();
+        //- const socket = io();
+        //- $('#intake-submit').click(function(e) {
+        //-     socket.emit('daily calory', { calory: $('#forTotal').val(), user: user.username });
+        //-     window.alert("saved to database!");
+        //-     location.reload();
+        //- })
+
+        $('#intake-submit').click(function(){
+            var uweight = user.weight;
+            var uname = user.username;
+            var ucal = $('#forTotal').val();
+
+            $.ajax({
+                type:'POST',
+                url:'/user/save/calory/'+uname+'/'+uweight+'/'+ucal,
+                success:function(res){
+                    if(res.result === 'success'){
+                        window.alert("Saved!");
+                            //- $('#weight').html("weight : "+newWeight+" kg")
+                            //- $('#showUpdate').show();
+                            //- $('#changeWeight').hide();
+                        location.reload();
+                    }
+                }
+
+            })
         })
+
+
+
+
+
 
         $('#submitWeight').click(function(){
             var newWeight = $('#weightInput').val();
