@@ -17,7 +17,7 @@
 #myChart{
     height:200px;
     width:100px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .w_class{
@@ -53,7 +53,7 @@
     position:absolute;
     display:inline-block;
     width:220px;
-    border:1px solid black;
+    /* border:1px solid black; */
 }
 #weightInput{
     width:150px;
@@ -71,7 +71,7 @@
     display:inline-block;
     height:120px;
     width:340px;
-    border:1px solid black;
+    /* border:1px solid black; */
 }
 
 .header-image-div{
@@ -204,7 +204,7 @@
 }
 #main{
     width:1500px;
-    border:1px solid red;
+    /* border:1px solid red; */
     margin-left:auto;
     margin-right:auto;
 }
@@ -214,12 +214,12 @@
 }
 #userInfo{
     width:600px;
-    border:1px solid blue;
+    /* border:1px solid blue; */
     margin-left:20px;
 
 }
 #graphInfo{
-    border:1px solid black;
+    /* border:1px solid black; */
     width:610px;
     position:absolute;
     margin-left:190px;
@@ -648,10 +648,10 @@ body.document-loaded .form__content {
     -webkit-transform: translate(-30px, -27px);
             transform: translate(-30px, -27px);
     opacity: 0;
-    color: #00ff6b;
+    color: #9a00b9;
   }
   76% {
-    color: #00ff6b;
+    color: #a800be;
     opacity: 1;
     -webkit-transform: translate(-30px, -27px);
             transform: translate(-30px, -27px);
