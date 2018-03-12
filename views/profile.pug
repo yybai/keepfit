@@ -18,11 +18,11 @@ block content
                         a(class="navA" href="/intro") About us
 
 
-    div#main
-        div#userInfo
+    div(id="main" class="row")
+        div(id="userInfo" class="col-sm-5")
             if (x)
-                div#personalInfo
-                    div#d1
+                div(id="personalInfo")
+                    div(id="d1" style="margin-bottom:40px;")
                         img(class="user-pic" src="./images/default-user-image.png")
                         div#userContact
                             p#username USER : #{x.username}   
@@ -31,23 +31,27 @@ block content
                             p#age age : #{x.age}
                             p#gender gender : #{x.gender}
                             a#edit(href='/profile/edit') EDIT PROFILE
-                    div#d2
-                        div#userData 
+                    hr
+                    div(id="d2" class="row" style="margin-top:20px;")
+                        div(id="userData"  class="col-sm-5" )
                             p#height height : #{x.height} cm
                             p#weight weight : #{x.weight} kg
-                            div(id="showUpdate" class="w_class") UPDATE WEIGHT
-                            div#changeWeight
-                                input(id="weightInput" placeholder = "enter new weight")
-                                span(id="submitWeight" class="w_class") update weight
-                                span(id="cancelWeight" class="w_class" style="margin-left:5px") cancel
-                        
+                            
 
-                        div#suggestion-d
+                        div(id="suggestion-d" class="col-sm-5")
                             p#suggestion Daily Calory is : #{result} kcal
-            
+                    div(id="showUpdate" class="w_class") UPDATE WEIGHT
+                    div(id="changeWeight")
+                        input(id="weightInput" placeholder = "enter new weight")
+                        span(id="submitWeight" class="w_class") update weight
+                        span(id="cancelWeight" class="w_class" style="margin-left:5px") cancel
+            hr
             p(class="intake-input") What did you eat today?
+
             div#dailyResult
+
             div#dailyTotal
+
 
             
 
@@ -65,7 +69,7 @@ block content
                     button#intake-submit submit
 
             div#searchResult
-        div#graphInfo
+        div(id="graphInfo" class="col-sm-5")
             div#tableDiv
                 table(id="result_table" border="1")
                     tr
@@ -88,14 +92,14 @@ block content
                 canvas(id="calChart")
             div(id='forWeight',style="width:600px;")
                 canvas(id="weightChart")
-        
+        //- div#liveChat
     
-    br
-    br
-    br
+
     a#gochat(href='/chat') Chat
     br
     br
+    
+
     footer
     //- a#logout(href='/user/logout') Logout
 

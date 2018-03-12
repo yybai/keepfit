@@ -50,9 +50,9 @@
     width:150px;
 }
 #suggestion-d{
-    position:absolute;
+    /* position:absolute;
     display:inline-block;
-    width:220px;
+    width:220px; */
     /* border:1px solid black; */
 }
 #weightInput{
@@ -68,9 +68,9 @@
 }
 
 #userData{
-    display:inline-block;
+    /* display:inline-block; */
     height:120px;
-    width:340px;
+    /* width:340px; */
     /* border:1px solid black; */
 }
 
@@ -207,26 +207,37 @@
     /* border:1px solid red; */
     margin-left:auto;
     margin-right:auto;
+    min-height:1000px;
+}
+#liveChat{
+    
+    width:50px;
+    height:50px;
+    border:1px solid black;
+    /* float:right; */
+    position:relative;
+    bottom:0;
+    right:0;
 }
 #nav{
     margin-left:1300px;
     margin-top:50px;
 }
 #userInfo{
-    width:600px;
+    /* width:600px; */
     /* border:1px solid blue; */
     margin-left:20px;
 
 }
 #graphInfo{
     /* border:1px solid black; */
-    width:610px;
-    position:absolute;
-    margin-left:190px;
+    /* width:610px; */
+    /* position:absolute;
+    margin-left:190px; */
 }
-#userInfo, #graphInfo{
+/* #userInfo, #graphInfo{
     display:inline-block;
-}
+} */
 
 
 
