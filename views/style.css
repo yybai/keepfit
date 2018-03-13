@@ -21,7 +21,7 @@
 }
 
 .w_class{
-    border:1px solid black;
+    /* border:1px solid black; */
     cursor:pointer;
 }
 
@@ -41,7 +41,7 @@
     text-align:center;
 }
 #showTable{
-    border:1px solid black;
+    /* border:1px solid black; */
 }
 #hideTable{
     border:1px solid black;
@@ -222,18 +222,24 @@
 #nav{
     margin-top:50px;
 }
+#navInfo{
+    /* min-width:108px;; */
+}
+
 #userInfo{
     /* width:600px; */
     /* border:1px solid blue; */
     /* margin-left:20px; */
-    margin-bottom:60px;
-
+    /* margin-bottom:60px; */
+   
 }
+
 #graphInfo{
     /* border:1px solid black; */
     /* width:610px; */
     /* position:absolute;
     margin-left:190px; */
+    
 }
 /* #userInfo, #graphInfo{
     display:inline-block;
@@ -800,9 +806,7 @@ body.document-loaded .form__content {
     font-family: "Raleway", sans-serif;
   }
   
-  a:hover {
-    background-color: #795d53;
-  }
+
   
   .drop li {
     opacity: 0;

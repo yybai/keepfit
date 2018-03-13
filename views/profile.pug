@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    div(class="profile_bg" style="border:1px solid black;")
+    div(class="profile_bg")
         div(id="nav" style="border:1px solid black;")
             span#greeting
             span#user #{x.username}
@@ -18,8 +18,15 @@ block content
     //-                     a(class="navA" href="/intro") About us
 
 
-    div(id="main" class="row" style="border:1px solid black;")
-        div(id="userInfo" class="col-sm-5 " style="border:1px solid black;")
+    div(id="main" class="row" )
+
+        nav(id="navInfo" class="col-sm-1" style="padding-bottom:5px;padding-top:5px; padding-left:0px; padding-right:0px;")
+            div(id="buttonList" class="btn-group-vertical" style="width:100%;")
+                button(type="button" class="btn btn-outline-info " style="width:100%;") PROFILE
+                button(type="button" class="btn btn-outline-info " style="width:100%;") ABOUT US
+                button(type="button" class="btn btn-outline-info " style="width:100%;") CONTACT US
+
+        div(id="userInfo" class="col-sm-5 " )
             if (x)
                 div(id="personalInfo" class="jumbotron jumbotron-fluid" style="box-shadow:5px 5px 10px gray;")
                     div(id="d1" style="margin-bottom:40px;")
@@ -49,8 +56,9 @@ block content
             p(class="intake-input") What did you eat today?
 
             div#dailyResult
-
+            hr
             div#dailyTotal
+            div(id="recalculate" class="btn btn-info" style="margin-top:-31px;float:right") RE-ENTER
 
 
             
@@ -58,19 +66,23 @@ block content
 
             input(id = "forTotal", style = "visibility:hidden")
             div#input_form
-                select(name="ds",class="input-ds" id = "ds")
+                select(name="ds",class="input-ds form-control" id = "ds")
                     option(value="ads" selected="selected") From All Data Source
                     option(value="Standard Reference") Standard Reference
                     option(value="Branded Food Products") Branded Food Products
-                input(id="intakeInputBox")
-                span
-                    button#intake-search search
-                span
-                    button#intake-submit submit
+                input(id="intakeInputBox" class="form-control" style="margin-top:10px;")
+                div( class="btn-group" style="width:100%;margin-top:10px;")
 
+                    button(id="intake-search" class="btn btn-info" style="width:100%") SEARCH
+
+                    button(id="intake-submit" class="btn btn-info" style="width:100%") SAVE
+                
+            hr
             div#searchResult
-        div(id="graphInfo" class="col-sm-6  jumbotron jumbotron-fluid" style="border:1px solid black; box-shadow:5px 5px 10px gray;")
-            div(id="tableDiv" class="table-responsive")
+        div(id="graphInfo" class="col-sm-6")
+            
+            div(id="tableDiv" class="table-responsive" )
+                p(id="tableTitle") YOUR SAVED CALORIES
                 table(id="result_table" class="table table-striped")
                     thead(class="thead-dark")
                         tr
@@ -87,14 +99,14 @@ block content
                                 td=calory.weight
                                 td=calory.createdAt
                                 td
-                                    button(class="deleteTotal")(tid = calory._id) delete
-            span#showTable show table
-            span#hideTable hide table
+                                    button(class="deleteTotal btn btn-info")(tid = calory._id) delete
+            button(id="showTable" class="btn btn-info" style="margin-top:10px;") SHOW SAVED CALORIES
+            button(id="hideTable" class="btn btn-info" ) HIDE TABLE
             hr
-            div(id="forCal" style="margin-top:20px;")
+            div(id="forCal" style="margin-top:20px; box-shadow:5px 5px 10px gray;" class="jumbotron jumbotron-fluid")
                 canvas(id="calChart" )
             hr
-            div(id='forWeight' style="margin-top:20px;")
+            div(id='forWeight' style="margin-top:20px; box-shadow:5px 5px 10px gray;" class="jumbotron jumbotron-fluid")
                 canvas(id="weightChart" )
         //- div#liveChat
     

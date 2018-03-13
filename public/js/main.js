@@ -88,7 +88,7 @@ setTimeout(function () {
 
 $( document ).ready(function() {
 
-  
+  $('#recalculate').hide();
   $('#changeWeight').hide();
   $('#showUpdate').click(function(){
     $('#changeWeight').show();
@@ -183,6 +183,7 @@ $( document ).ready(function() {
   var total_cal = 0;
   var intake_list = [];
   var nutrion = 0 ;
+  var hr = "<hr>"
 
   $('#intake-search').click(function(){
     var q = document.getElementById("intakeInputBox").value;
@@ -199,24 +200,32 @@ $( document ).ready(function() {
           var row = '<div class="container" id="'+i.ndbno+'">';
           row += '<p>' + i.name + '</p>';
           row += '</div>';
+          
           $('#searchResult').append(row);
+          $('#searchResult').append(hr);
         })
         $('.easyPaginateNav').html("");
         $('#searchResult').easyPaginate({
           paginateElement: 'div',
-          elementsPerPage: 20,
+          elementsPerPage: 10,
           // effect: 'climb'
         });
 
       }
     })
-
-
-
-
-
   })
+
+
+  $('#recalculate').click(function(){
+    $("#dailyResult").html("");
+    $("#dailyTotal").html("");
+    total_cal = 0;
+    $('#recalculate').hide();
+  })
+
+
   $("#searchResult").on("click",".container",function(){
+    $('#recalculate').show();
     console.log(  $(this).attr('id')  );
     var ndbno = $(this).attr('id');
     $.ajax({
@@ -234,7 +243,7 @@ $( document ).ready(function() {
         var i = parseInt(nutrion);
         total_cal = total_cal + i;
         
-        $("#dailyResult").append(result.foods[0].food.desc.name+"  calories: " + nutrion + "<br>");
+        $("#dailyResult").append(result.foods[0].food.desc.name+" <br> <b>CALORY : </b> " + nutrion + "<br>");
         $("#dailyTotal").html("Total calories you take today is: " + total_cal);
         $("#forTotal").val(total_cal);
       }
