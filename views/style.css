@@ -31,7 +31,7 @@
 
 #userContact{
     display:inline-block;
-    width:400px;
+    /* width:400px; */
     position:absolute;
     margin-left:20px;
     margin-top:-4px;
@@ -220,7 +220,6 @@
     right:0;
 }
 #nav{
-    margin-left:1300px;
     margin-top:50px;
 }
 #userInfo{
