@@ -1,28 +1,28 @@
 extends layout
 
 block content
-    div(class="profile_bg" )
-        div#nav
+    div(class="profile_bg" style="border:1px solid black;")
+        div(id="nav" style="border:1px solid black;")
             span#greeting
             span#user #{x.username}
             a#logout(href='/user/logout') Logout
     //- img(class="profile_bg" src="/images/profileBG.jpg")
-    nav
-        ul(class="navMain")
-            li
-                a(class="navA" href="#") Home
-                ul(class="drop menu1")
-                    li
-                        a(class="navA" href="/profile" style="margin-top:2px;") Profile
-                    li
-                        a(class="navA" href="/intro") About us
+    //- nav(style="border:1px solid black;")
+    //-     ul(class="navMain")
+    //-         li
+    //-             a(class="navA" href="#") Home
+    //-             ul(class="drop menu1")
+    //-                 li
+    //-                     a(class="navA" href="/profile" style="margin-top:2px;") Profile
+    //-                 li
+    //-                     a(class="navA" href="/intro") About us
 
 
-    div(id="main" class="row")
-        div(id="userInfo" class="col-sm-5")
+    div(id="main" class="row" style="border:1px solid black;")
+        div(id="userInfo" class="col-sm-5 " style="border:1px solid black;")
             if (x)
-                div(id="personalInfo")
-                    div(id="d1" style="margin-bottom:40px;")
+                div(id="personalInfo" class="jumbotron jumbotron-fluid" style="box-shadow:5px 5px 10px gray;")
+                    div(id="d1" style="margin-bottom:40px; padding-left:20px;")
                         img(class="user-pic" src="./images/default-user-image.png")
                         div#userContact
                             p#username USER : #{x.username}   
@@ -32,7 +32,7 @@ block content
                             p#gender gender : #{x.gender}
                             a#edit(href='/profile/edit') EDIT PROFILE
                     hr
-                    div(id="d2" class="row" style="margin-top:20px;")
+                    div(id="d2" class="row" style="margin-top:20px; padding-left:20px;")
                         div(id="userData"  class="col-sm-5" )
                             p#height height : #{x.height} cm
                             p#weight weight : #{x.weight} kg
@@ -40,11 +40,11 @@ block content
 
                         div(id="suggestion-d" class="col-sm-5")
                             p#suggestion Daily Calory is : #{result} kcal
-                    div(id="showUpdate" class="w_class") UPDATE WEIGHT
-                    div(id="changeWeight")
-                        input(id="weightInput" placeholder = "enter new weight")
-                        span(id="submitWeight" class="w_class") update weight
-                        span(id="cancelWeight" class="w_class" style="margin-left:5px") cancel
+                    button(type="button" id="showUpdate" class="btn btn-info" style="margin-left:20px; text-align:center") UPDATE WEIGHT
+                    div(id="changeWeight" style="margin-left:20px;")
+                        input(id="weightInput" placeholder = "  NEW WEIGHT" style="margin-right:10px")
+                        button(type="button" id="submitWeight" class="btn btn-info btn-sm") UPDATE
+                        button(type="button" id="cancelWeight" class="btn btn-dark btn-sm" style="margin-left:5px") CANCEL
             hr
             p(class="intake-input") What did you eat today?
 
@@ -69,29 +69,33 @@ block content
                     button#intake-submit submit
 
             div#searchResult
-        div(id="graphInfo" class="col-sm-5")
-            div#tableDiv
-                table(id="result_table" border="1")
-                    tr
-                        th user
-                        th calory
-                        th weight
-                        th createdAt
-                        th
-                    each calory in calories
-                        tr(id=`${calory._id}`)
-                            td=calory.user
-                            td=calory.calory
-                            td=calory.weight
-                            td=calory.createdAt
-                            td
-                                button(class="deleteTotal")(tid = calory._id) delete
+        div(id="graphInfo" class="col-sm-6  jumbotron jumbotron-fluid" style="border:1px solid black;")
+            div(id="tableDiv" class="table-responsive")
+                table(id="result_table" class="table table-striped")
+                    thead(class="thead-dark")
+                        tr
+                            th user
+                            th calory
+                            th weight
+                            th createdAt
+                            th
+                    tbody
+                        each calory in calories
+                            tr(id=`${calory._id}`)
+                                td=calory.user
+                                td=calory.calory
+                                td=calory.weight
+                                td=calory.createdAt
+                                td
+                                    button(class="deleteTotal")(tid = calory._id) delete
             span#showTable show table
             span#hideTable hide table
-            div(id="forCal", style="width:600px;")
-                canvas(id="calChart")
-            div(id='forWeight',style="width:600px;")
-                canvas(id="weightChart")
+            hr
+            div(id="forCal" style="margin-top:20px;")
+                canvas(id="calChart" )
+            hr
+            div(id='forWeight' style="margin-top:20px;")
+                canvas(id="weightChart" )
         //- div#liveChat
     
 

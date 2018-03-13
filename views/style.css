@@ -203,7 +203,7 @@
     /* margin-top:-30px; */
 }
 #main{
-    width:1500px;
+    max-width:1500px;
     /* border:1px solid red; */
     margin-left:auto;
     margin-right:auto;
@@ -227,6 +227,7 @@
     /* width:600px; */
     /* border:1px solid blue; */
     margin-left:20px;
+    margin-bottom:60px;
 
 }
 #graphInfo{
@@ -292,9 +293,16 @@ lable[class='pass']:before {
     -webkit-transition: .2s;
     transition: .2s;
 }
+
+#tableDiv{
+    height:300px;
+    overflow-y:scroll;
+    overflow-x:none;
+}
   
-  
-  
+/* thead tr{
+    position:relative;
+} */
 
   
  

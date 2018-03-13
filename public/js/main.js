@@ -136,6 +136,10 @@ $( document ).ready(function() {
     $('#showTable').hide();
     $('#hideTable').show();
     $('#tableDiv').show();
+    // $('#result_table').easyPaginate({
+    //   paginateElement:'tr',
+    //   elementsPerPage:5,
+    // })
   })
   $('#hideTable').click(function(){
     $('#showTable').show();
@@ -166,12 +170,9 @@ $( document ).ready(function() {
 
 
 
-  $('#showTable').click(function(){
-    $('#result_table').easyPaginate({
-      paginateElement:'tr',
-      elementsPerPage:5,
-    })
-  })
+  // $('#showTable').click(function(){
+
+  // })
 
 
 
