@@ -87,7 +87,7 @@ setTimeout(function () {
 
 
 $( document ).ready(function() {
-
+  
   $('#recalculate').hide();
   $('#changeWeight').hide();
   $('#showUpdate').click(function(){
